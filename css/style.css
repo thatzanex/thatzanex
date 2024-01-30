@@ -298,6 +298,148 @@ background-color: #d34343;
 }
 
 
+
+/* Edit popout */
+
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: larger;
+  font-weight: bolder;
+  padding: 8px;
+}
+
+#acceptBtn {
+  background-color: #4d8fd6;
+  transition: background-color 0.3s;
+  padding: 6px 10px;
+  height: 35px;
+  max-width: fit-content;
+  cursor: pointer;
+  border-radius: 6px;
+  border: none;
+  margin-top: 10px;
+}
+
+#acceptBtn:hover {
+  background-color: #4178b3;
+}
+
+.popout input {
+  margin-left: 10px;
+}
+
+.popout span {
+  margin-top: 10px;
+}
+
+#newCategory, #newDueDate, #newText {
+  margin-top: 10px;
+}
+
+
+.edit-dropdown-menu {
+  margin: 10px 10px 0px 0px;
+  padding: 8px;
+  background-color: #FFFFFF;
+  height: 33px;
+  width: 168px;
+}
+
+.newPriority option {
+  margin: 0px 0px 0px 0px;
+  border: none;
+  border-radius: 0px;
+  border-width: 0px;
+}
+
+
+
+
+/* Edit Title Popout */
+
+
+#editTitlePopup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#acceptTitleBtn {
+  background-color: #4d8fd6;
+  transition: background-color 0.3s;
+  padding: 6px 10px;
+  height: 35px;
+  max-width: fit-content;
+  cursor: pointer;
+  border-radius: 6px;
+  border: none;
+  margin-top: 10px;
+}
+
+#acceptTitleBtn:hover {
+  background-color: #4178b3;
+}
+
+#cancelTitleBtn {
+  background-color: #ff5252;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  height: 35px;
+  cursor: pointer;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+#cancelTitleBtn:hover {
+  background-color: #d34343;
+}
+
+
+/* Edit Title Popout End */
+
 .addBtn {
 width: 110px;
 font-size: 15px;
@@ -307,6 +449,7 @@ cursor: pointer;
 border-radius: 6px;
 border: solid;
 border-width: 1px;
+margin-top: -1px;
 }
 
 .todo-description-display {
@@ -320,7 +463,7 @@ cursor: pointer;
 width: 168px;
 height: 33px;
 margin-right: 10px;
-font-size: 15px
+font-size: 15px;
 }
 
 input, select {
@@ -542,7 +685,19 @@ background-color: #f1f1f1;
   }
 
   #preloader {
-    display: none
+    height: 100%;
+    width: 100%;
+    background: #1e91f3 url(/assests/preloader.gif) no-repeat center center;
+    background-size: fit-content;
+    position: fixed;
+    z-index: 100;
+    left: 0px;
+    top: 0px;
   }
+
+  #cancelTitleBtn {
+    width: fit-content;
+  }
+
 }
 
