@@ -6,22 +6,46 @@ window.onload = function() {
     loadEditImageState();
 }
 
-// Funktion zum Bearbeiten des ToDo-Listennamens und Speichern in einem Cookie
+// Funktion zum Bearbeiten des ToDo-Listennamens und Anzeigen des Popups
 function editTitle() {
-    // Benutzer nach neuem ToDo-Listennamen fragen
-    var newTitle = prompt("Neuen ToDo-Listennamen eingeben:", document.getElementById('todo-title').innerText);
+    // Anzeigen des Popup
+    openTitleEditPopup();
+    toggleSortierenDatumCheck();
+}
 
-    // Überprüfen, ob der Benutzer auf "Abbrechen" geklickt hat oder das Eingabefeld leer gelassen hat
-    if (newTitle === null || newTitle.trim() === "") {
-        alert("Ungültiger ToDo-Listennamen. Bitte versuchen Sie es erneut.");
-    } else {
+// Funktion zum Anzeigen des Popup zum Bearbeiten des Titels
+function openTitleEditPopup() {
+    // Setze den aktuellen Titelwert im Popup
+    document.getElementById('newTitle').value = document.getElementById('todo-title').innerText;
+
+    // Öffne das Popup
+    document.getElementById('editTitlePopup').style.display = 'block';
+}
+
+// Funktion zum Übernehmen der Änderungen am Titel und Schließen des Popups
+function applyTitleChanges() {
+    const newTitle = document.getElementById('newTitle').value;
+
+    // Überprüfen, ob der neue Titel nicht leer ist
+    if (newTitle.trim() !== "") {
         // ToDo-Listennamen aktualisieren
         document.getElementById('todo-title').innerText = newTitle;
 
         // ToDo-Listennamen in Cookie speichern
         document.cookie = "todoTitle=" + encodeURIComponent(newTitle) + "; expires=Thu, 31 Dec 2037 12:00:00 UTC; path=/";
+
+        // Schließe das Popup
+        closeTitleEditPopup();
+    } else {
+        alert("Ungültiger ToDo-Listennamen. Bitte versuchen Sie es erneut.");
     }
 }
+
+// Funktion zum Schließen des Popup zum Bearbeiten des Titels
+function closeTitleEditPopup() {
+    document.getElementById('editTitlePopup').style.display = 'none';
+}
+
 
 // Funktion zum Laden des ToDo-Listennamens aus dem Cookie
 function loadTodoTitle() {
