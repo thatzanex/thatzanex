@@ -321,6 +321,7 @@ background-color: #d34343;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  z-index: 2;
 }
 
 .close {
@@ -391,6 +392,7 @@ background-color: #d34343;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.5);
+  z-index: auto;
 }
 
 .popup-content {
@@ -488,6 +490,7 @@ background-color: #f1f1f1;
   margin-top: 1px;
   margin-left: 217px;
   width: 200px;
+  z-index: 1;
 }
 
 .sortierBtn {
