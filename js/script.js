@@ -347,7 +347,6 @@ function addTodo() {
     const todoInput = document.getElementById('todo-input');
     const todoList = document.getElementById('todo-list');
     const dueDateInput = document.getElementById('due-date');
-    console.log(dueDateInput)
     const categoryInput = document.getElementById('category');
     const priorityInput = document.getElementById('priority');
 
@@ -394,13 +393,9 @@ function addTodo() {
         detailsContainer.className = 'todo-details';
 
         const dueDateText = document.createElement('span');
-        console.log(dueDateText)
         const dueDate = new Date(dueDateInput.value);
-        console.log(dueDate)
         const formattedDueDate = dueDateInput.value
-        console.log(formattedDueDate)
         const formattedDate = convertDateFormat(formattedDueDate);
-        console.log(formattedDate)
         dueDateText.innerText = `Bis: ${formattedDate}`;
 
         detailsContainer.appendChild(dueDateText);
@@ -444,8 +439,34 @@ function convertDateFormat(inputDate) {
     }
     return "Ungültiges Datum";
 }
+
+
 // Die Funktion 'editTodo' wird aufgerufen, wenn der "Bearbeiten"-Button geklickt wird.
+
+// Funktion, um das Edit-Popup zu öffnen
 function editTodo(todoItem) {
+    // Setze die Werte im Popup
+    document.getElementById('newText').value = todoItem.querySelector('span').innerText;
+    document.getElementById('newDueDate').value = todoItem.querySelector('.todo-details span:nth-child(1)').innerText.slice(4);
+    document.getElementById('newCategory').value = todoItem.querySelector('.todo-details span:nth-child(2)').innerText.slice(11);
+    document.getElementById('newPriority').value = todoItem.querySelector('.todo-details span:nth-child(3)').innerText.slice(10);
+
+    // Öffne das Popup und übergebe todoItem als Parameter
+    document.getElementById('editPopup').style.display = 'block';
+
+    // Übergebe die Funktion applyChanges mit todoItem als Parameter direkt an das onclick-Event
+    document.getElementById('acceptBtn').onclick = function() {
+        applyChanges(todoItem);
+    };
+}
+
+// Funktion, um Änderungen zu übernehmen und das Popup zu schließen
+function applyChanges(todoItem) {
+    const newText = document.getElementById('newText').value;
+    const newDueDate = document.getElementById('newDueDate').value;
+    const newCategory = document.getElementById('newCategory').value;
+    const newPriority = document.getElementById('newPriority').value;
+
     // ToDo-Element bearbeiten
     const todoText = todoItem.querySelector('span');
     const detailsContainer = todoItem.querySelector('.todo-details');
@@ -453,40 +474,41 @@ function editTodo(todoItem) {
     const categoryText = detailsContainer.querySelector('span:nth-child(2)');
     const priorityText = detailsContainer.querySelector('span:nth-child(3)');
 
-    // Hier kannst du den Code ergänzen, um die verschiedenen Eigenschaften zu bearbeiten.
-
-    // Beispiel: Text bearbeiten
-    const newText = prompt('Neuer Text', todoText.innerText);
-    if (newText !== null) {
+    // Text bearbeiten
+    if (newText.trim() !== "") {
         todoText.innerText = newText;
     }
 
-    // Beispiel: Datum bearbeiten
-    const newDueDate = prompt('Neues Datum (DD.MM.YYYY)', dueDateText.innerText.slice(4));
-    console.log(newDueDate)
-    const parsedDueDate = new Date(newDueDate);
-    console.log(isValidDateFormat(newDueDate.trim()))
-    const formattedDueDate = isValidDateFormat(newDueDate.trim()) ? dueDateText.innerText = `Bis: ${newDueDate.trim()}` : dueDateText.innerText = `Ungültiges Datum`;
-    console.log(formattedDueDate)
-    console.log(dueDateText)
+    // Datum bearbeiten
+    if (isValidDateFormat(newDueDate.trim())) {
+        dueDateText.innerText = `Bis: ${newDueDate.trim()}`;
+    } else {
+        dueDateText.innerText = `Ungültiges Datum`;
+    }
 
-    // Beispiel: Kategorie bearbeiten
-    const newCategory = prompt('Neue Kategorie', categoryText.innerText.slice(11));
-    if (newCategory !== null) {
+    // Kategorie bearbeiten
+    if (newCategory.trim() !== "") {
         categoryText.innerText = `Kategorie: ${newCategory}`;
     }
 
-    // Beispiel: Priorität bearbeiten
-    const newPriority = prompt('Neue Priorität', priorityText.innerText.slice(10));
-    if (newPriority !== null) {
+    // Priorität bearbeiten
+    if (newPriority.trim() !== "") {
         priorityText.innerText = `Priorität: ${newPriority}`;
     }
 
+    // Schließe das Popup
+    closeEditPopup();
+
     saveTodos(); // Aktualisierte ToDo-Daten speichern
 
-    checkDate(); // Die Daten checken und farbe geben
-
+    checkDate(); // Die Daten checken und Farbe geben
 }
+
+// Funktion, um das Popup zu schließen
+function closeEditPopup() {
+    document.getElementById('editPopup').style.display = 'none';
+}
+
 
 // Funktion zum Überprüfen, ob ein Datum gültig ist
 function isValidDateFormat(dateString) {
