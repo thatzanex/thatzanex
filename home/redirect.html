@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="redirect-page">
+    <div class="redirect-container">
+        <div class="pokeball-spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script>
+    // Get target from URL query (e.g., redirect.html?target=about.html)
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("target") || "index.html";
+
+    setTimeout(() => {
+      window.location.href = target;
+    }, 2000); // 2 sec loading
+    </script>
+</body>
+</html>
