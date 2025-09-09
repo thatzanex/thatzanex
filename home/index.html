@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="icon" href="/home/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- Nav Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <span class="logo">Pokédex</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="redirect.html?target=..\gacha\index.html">Gacha</a>
+        </div>
+    </nav>
+
+
+    <!-- Header-->
+    <header>
+        <h1>Pokédex</h1>
+        <div class="pokeball-center"></div>
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search Pokémon (name or ID)" />
+            <button onclick="searchPokemon()">Search</button>
+            <button class="filter-toggle" onclick="toggleFilters()">Filters ⚙️</button>
+        </div>
+    </header>
+
+    <!-- Advanced Filters -->
+    <section class="filters-container">
+        <div id="filters" class="filters hidden">
+            <div class="filter-section">
+                <h3>Types</h3>
+                <div class="types" id="typeFilters"></div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Ability</h3>
+                <select id="abilityFilter">
+                    <option value="">All</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <h3>Height</h3>
+                <select id="heightFilter">
+                    <option value="">All</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <h3>Weight</h3>
+                <select id="weightFilter">
+                    <option value="">All</option>
+                    <option value="light">Light</option>
+                    <option value="medium">Medium</option>
+                    <option value="heavy">Heavy</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <h3>Number Range</h3>
+                <div class="number-range">
+                    <input type="number" id="minId" value="1">
+                    <span>-</span>
+                    <input type="number" id="maxId" value="1025">
+                </div>
+            </div>
+
+
+            <div class="filter-section">
+                <button onclick="applyFilters()">Apply Filters</button>
+                <button onclick="resetFilters()">Reset</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loader -->
+    <div id="loader" class="loader hidden"></div>
+    <div id="pokemonList" class="grid"></div>
+
+    <!-- Pokemon List Pages -->
+    <main>
+        <div id="pokemonList" class="grid"></div>
+
+        <div class="pagination">
+            <button onclick="prevPage()">⬅ Prev</button>
+            <span id="pageInfo"></span>
+            <button onclick="nextPage()">Next ➡</button>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="pokemonModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
