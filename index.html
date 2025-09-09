@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pokémon Gacha</title>
+    <link rel="icon" href="/home/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <h1>Pokémon Gacha</h1>
+        <div class="pokeball-center"></div>
+
+        <!-- Global nav (same style as Pokédex). Pokédex uses redirect page. -->
+        <nav>
+            <button type="button" onclick="showSection('store')">🛒 Store</button>
+            <button type="button" onclick="showSection('spin')">🎰 Spin</button>
+            <button type="button" onclick="showSection('inventoryPage')">📥 Inventory</button>
+            <button type="button" onclick="showSection('indexPage')">📖 Index</button>
+            <button type="button" onclick="window.location.href='/home/redirect.html?to=/home/index.html'">🔎 Pokédex</button>
+        </nav>
+    </header>
+
+    <!-- Coins -->
+    <div id="currency">Coins: <span id="coins">0</span> 🪙</div>
+
+    <!-- STORE -->
+    <section id="store">
+        <h2>Store</h2>
+        <div class="packs">
+            <!-- Free -->
+            <div class="pack">
+                <h3>FREE Pack</h3>
+                <p>Get started — costs 0</p>
+                <div class="qty-row">
+                    <span class="qty-label">Qty</span>
+                    <input id="qty-free" class="qty-input" type="number" min="1" value="1">
+                </div>
+                <button onclick="buyPackFromUI('free')">Claim</button>
+            </div>
+
+            <!-- Common -->
+            <div class="pack">
+                <h3>Common Pack</h3>
+                <p>Cost: 50 🪙</p>
+                <div class="qty-row">
+                    <span class="qty-label">Qty</span>
+                    <input id="qty-common" class="qty-input" type="number" min="1" value="1">
+                </div>
+                <button onclick="buyPackFromUI('common')">Buy</button>
+            </div>
+
+            <!-- Rare -->
+            <div class="pack">
+                <h3>Rare Pack</h3>
+                <p>Cost: 150 🪙</p>
+                <div class="qty-row">
+                    <span class="qty-label">Qty</span>
+                    <input id="qty-rare" class="qty-input" type="number" min="1" value="1">
+                </div>
+                <button onclick="buyPackFromUI('rare')">Buy</button>
+            </div>
+
+            <!-- Epic -->
+            <div class="pack">
+                <h3>Epic Pack</h3>
+                <p>Cost: 400 🪙</p>
+                <div class="qty-row">
+                    <span class="qty-label">Qty</span>
+                    <input id="qty-epic" class="qty-input" type="number" min="1" value="1">
+                </div>
+                <button onclick="buyPackFromUI('epic')">Buy</button>
+            </div>
+
+            <!-- Legendary -->
+            <div class="pack">
+                <h3>Legendary Pack</h3>
+                <p>Cost: 1000 🪙</p>
+                <div class="qty-row">
+                    <span class="qty-label">Qty</span>
+                    <input id="qty-legendary" class="qty-input" type="number" min="1" value="1">
+                </div>
+                <button onclick="buyPackFromUI('legendary')">Buy</button>
+            </div>
+
+            <!-- Mythical -->
+            <div class="pack">
+                <h3>Mythical Pack</h3>
+                <p>Cost: 2000 🪙</p>
+                <div class="qty-row">
+                    <span class="qty-label">Qty</span>
+                    <input id="qty-mythical" class="qty-input" type="number" min="1" value="1">
+                </div>
+                <button onclick="buyPackFromUI('mythical')">Buy</button>
+            </div>
+
+            <!-- UltraBeast -->
+            <div class="pack">
+                <h3>UltraBeast Pack</h3>
+                <p>Cost: 1500 🪙</p>
+                <div class="qty-row">
+                    <span class="qty-label">Qty</span>
+                    <input id="qty-ultrabeast" class="qty-input" type="number" min="1" value="1">
+                </div>
+                <button onclick="buyPackFromUI('ultrabeast')">Buy</button>
+            </div>
+
+            <!-- Secret -->
+            <div class="pack">
+                <h3>Secret Pack</h3>
+                <p>Cost: 5000 🪙</p>
+                <div class="qty-row">
+                    <span class="qty-label">Qty</span>
+                    <input id="qty-secret" class="qty-input" type="number" min="1" value="1">
+                </div>
+                <button onclick="buyPackFromUI('secret')">Buy</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SPIN -->
+    <section id="spin" class="hidden">
+        <div class="spin-left">
+            <h2>🎰 Pack Opening</h2>
+            <div id="spin-box">
+                <div id="spin-animation"></div>
+                <div id="result"></div>
+            </div>
+        </div>
+
+        <div class="spin-right">
+            <h3>📦 Your Packs</h3>
+            <div id="unopened-packs" class="pack-grid"></div>
+        </div>
+    </section>
+
+    <!-- INVENTORY -->
+    <section id="inventoryPage" class="hidden">
+        <h2>Inventory</h2>
+        <div id="inventoryGrid" class="inventory"></div>
+    </section>
+
+    <!-- INDEX -->
+    <section id="indexPage" class="hidden">
+        <h2>Rarity Index</h2>
+        <div id="rarity-index"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
