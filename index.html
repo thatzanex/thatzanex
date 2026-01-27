@@ -298,23 +298,13 @@
             document.getElementById('body-el').classList.remove('overflow-hidden');
         }
 
-        function runCaptchaSimulation() {
-            if(isCaptchaVerified) return;
+        // This function runs automatically when Cloudflare verifies the user
+        function turnstileCallback(token) {
+            console.log("Cloudflare verification successful. Token:", token);
+            isCaptchaVerified = true;
             
-            const spinner = document.getElementById('c-spinner');
-            const check = document.getElementById('c-check');
-            
-            // Visual feedback
-            spinner.style.display = 'block';
-            
-            // Simulate network delay
-            setTimeout(() => {
-                spinner.style.display = 'none';
-                check.style.display = 'block';
-                isCaptchaVerified = true;
-                document.getElementById('mock-captcha-btn').style.borderColor = '#10b981';
-                document.getElementById('mock-captcha-btn').style.background = '#f0fdf4';
-            }, 1000);
+            // Optional: Hide error message if it was showing
+            document.getElementById('error-msg').classList.add('hidden');
         }
 
         function handleEnter(e) {
