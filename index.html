@@ -6,13 +6,7 @@
     <title>Interaktives Profil | Batu Atakan Erol</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- 
-      REAL CLOUDFLARE TURNSTILE SETUP:
-      1. Sign up at https://www.cloudflare.com/products/turnstile/
-      2. Get your "Site Key" and "Secret Key".
-      3. Uncomment the script tag below:
-      <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         /* Custom Scrollbar for a cleaner look */
         ::-webkit-scrollbar {
@@ -171,22 +165,10 @@
                     class="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition"
                     onkeypress="handleEnter(event)">
                 
-                <!-- Mock Cloudflare Turnstile Widget -->
-                <!-- FOR REAL IMPLEMENTATION: Replace this entire .mock-captcha div with:
-                     <div class="cf-turnstile" data-sitekey="YOUR_KEY" data-callback="captchaSuccessCallback"></div> 
-                -->
-                <div class="mock-captcha mx-auto" id="mock-captcha-btn" onclick="runCaptchaSimulation()">
-                    <div class="captcha-checkbox">
-                        <div class="captcha-spinner" id="c-spinner"></div>
-                        <div class="captcha-checkmark" id="c-check">✔</div>
+                    <div class="cf-turnstile" 
+                         data-sitekey="0x4AAAAAACTp9mTuVD-H0e8B" 
+                         data-callback="turnstileCallback">
                     </div>
-                    <div class="captcha-text">Menschliche Überprüfung</div>
-                    <div class="captcha-logo">
-                        <!-- Simple visual mimicking Cloudflare logo structure -->
-                        <div style="font-weight:bold; font-size:18px; color:#f48120;">☁</div>
-                        <span>Privacy • Terms</span>
-                    </div>
-                </div>
 
                 <p id="error-msg" class="text-red-500 text-sm hidden">Falsches Passwort oder Captcha fehlt.</p>
             </div>
