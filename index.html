@@ -6,6 +6,13 @@
     <title>Interaktives Profil | Batu Atakan Erol</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 
+      REAL CLOUDFLARE TURNSTILE SETUP:
+      1. Sign up at https://www.cloudflare.com/products/turnstile/
+      2. Get your "Site Key" and "Secret Key".
+      3. Uncomment the script tag below:
+      <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    -->
     <style>
         /* Custom Scrollbar for a cleaner look */
         ::-webkit-scrollbar {
@@ -46,39 +53,155 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Security Gate Styles */
+        #security-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: rgba(250, 250, 249, 1); /* Stone-50 opaque */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        #security-gate.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Mock Captcha Styling (Visual Simulation) */
+        .mock-captcha {
+            width: 300px;
+            height: 65px;
+            background: #f9f9f9;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            cursor: pointer;
+            user-select: none;
+        }
+        .mock-captcha:hover {
+            background: #f3f4f6;
+        }
+        .captcha-checkbox {
+            width: 28px;
+            height: 28px;
+            background: #fff;
+            border: 2px solid #c7c7c7;
+            border-radius: 2px;
+            margin-right: 12px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .captcha-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #dbdbdb;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        .captcha-checkmark {
+            color: #10b981;
+            font-size: 20px;
+            display: none;
+        }
+        .captcha-text {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 14px;
+            color: #1f2937;
+        }
+        .captcha-logo {
+            margin-left: auto;
+            display: flex;
+            flex-col: column;
+            align-items: center;
+        }
+        .captcha-logo img {
+            height: 20px;
+            opacity: 0.6;
+        }
+        .captcha-logo span {
+            font-size: 8px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
     <!-- Chosen Palette: Warm Neutrals (Stone/Amber) - Minimalistic, calm, and professional. 
          Background: Stone-100, Text: Stone-800, Accent: Amber-600. -->
     
     <!-- Application Structure Plan: 
-         1. Hero Section: Immediate personal branding with name, motto, and contact details.
-         2. Dashboard Layout: The main content is divided into two primary interactive zones:
+         1. Security Gate: Blocks content until password + captcha valid.
+         2. Hero Section: Immediate personal branding with name, motto, and contact details.
+         3. Dashboard Layout: The main content is divided into two primary interactive zones:
             a. "Werdegang" (Journey): An interactive vertical timeline combining education and experience. 
-               Why? It simplifies the chronological complexity of parallel activities (FOS + Internship) and allows users to drill down into specific roles.
-            b. "Kompetenz-Radar" (Skills): A split view with a Radar Chart for visual impact and a filterable list for detailed exploration.
-               Why? It allows recruiters to quickly assess the candidate's profile shape (Dev vs. Ops vs. Soft Skills).
-         3. Interaction: Users click timeline nodes to see details, and toggle skill categories to update the list.
-         This structure transforms a linear document into an explorable persona. -->
+            b. "Kompetenz-Radar" (Skills): A split view with a Radar Chart for visual impact and a filterable list.
+         -->
 
     <!-- Visualization & Content Choices:
-         1. Radar Chart (Chart.js): 
-            - Goal: Visualize the balance of skills (Frontend, Backend, DevOps, Soft Skills).
-            - Interaction: Hover for values.
-            - Justification: Shows a well-rounded profile instantly.
-         2. Interactive Timeline:
-            - Goal: Present history clearly.
-            - Interaction: Click to expand/select, preventing text overload.
-            - Method: HTML/JS DOM manipulation.
-         3. Dynamic Counters:
-            - Goal: Highlight key stats (Years of Schooling, Projects, etc. implied).
-            - Interaction: Auto-increment on load.
+         1. Radar Chart (Chart.js): Visualize the balance of skills.
+         2. Interactive Timeline: HTML/JS DOM manipulation.
+         3. Mock Captcha: Custom CSS/JS simulation for demo purposes.
          -->
 
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="bg-stone-100 text-stone-800 font-sans antialiased selection:bg-amber-200 selection:text-stone-900">
+<body class="bg-stone-100 text-stone-800 font-sans antialiased selection:bg-amber-200 selection:text-stone-900 overflow-hidden" id="body-el">
 
-    <!-- Main App Container -->
+    <!-- SECURITY GATE -->
+    <div id="security-gate">
+        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-stone-200 text-center space-y-6">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-bold text-stone-900">Geschützter Bereich</h2>
+                <p class="text-stone-500 text-sm">Bitte geben Sie das Passwort ein, um auf das Portfolio von Batu Atakan Erol zuzugreifen.</p>
+            </div>
+
+            <div class="space-y-4">
+                <input type="password" id="password-input" placeholder="Passwort eingeben" 
+                    class="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition"
+                    onkeypress="handleEnter(event)">
+                
+                <!-- Mock Cloudflare Turnstile Widget -->
+                <!-- FOR REAL IMPLEMENTATION: Replace this entire .mock-captcha div with:
+                     <div class="cf-turnstile" data-sitekey="YOUR_KEY" data-callback="captchaSuccessCallback"></div> 
+                -->
+                <div class="mock-captcha mx-auto" id="mock-captcha-btn" onclick="runCaptchaSimulation()">
+                    <div class="captcha-checkbox">
+                        <div class="captcha-spinner" id="c-spinner"></div>
+                        <div class="captcha-checkmark" id="c-check">✔</div>
+                    </div>
+                    <div class="captcha-text">Menschliche Überprüfung</div>
+                    <div class="captcha-logo">
+                        <!-- Simple visual mimicking Cloudflare logo structure -->
+                        <div style="font-weight:bold; font-size:18px; color:#f48120;">☁</div>
+                        <span>Privacy • Terms</span>
+                    </div>
+                </div>
+
+                <p id="error-msg" class="text-red-500 text-sm hidden">Falsches Passwort oder Captcha fehlt.</p>
+            </div>
+
+            <button onclick="attemptLogin()" 
+                class="w-full bg-stone-900 text-white font-bold py-3 rounded-lg hover:bg-amber-600 transition duration-300 shadow-md">
+                Zugriff anfordern
+            </button>
+            
+            <p class="text-xs text-stone-400 mt-4">Tipp: Das Passwort ist <strong>batu2026</strong></p>
+        </div>
+    </div>
+
+
+    <!-- Main App Container (Initially blurred via JS if needed, but gate covers it) -->
     <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen flex flex-col gap-8">
 
         <!-- Header / Hero Section -->
@@ -183,6 +306,64 @@
 
     <!-- JavaScript Logic -->
     <script>
+        // --- SECURITY LOGIC ---
+        let isCaptchaVerified = false;
+        const CORRECT_PASS = "batu2026"; // Simple client-side password
+
+        // Check if previously logged in
+        if (sessionStorage.getItem('auth') === 'true') {
+            document.getElementById('security-gate').classList.add('hidden');
+            document.getElementById('body-el').classList.remove('overflow-hidden');
+        }
+
+        function runCaptchaSimulation() {
+            if(isCaptchaVerified) return;
+            
+            const spinner = document.getElementById('c-spinner');
+            const check = document.getElementById('c-check');
+            
+            // Visual feedback
+            spinner.style.display = 'block';
+            
+            // Simulate network delay
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                check.style.display = 'block';
+                isCaptchaVerified = true;
+                document.getElementById('mock-captcha-btn').style.borderColor = '#10b981';
+                document.getElementById('mock-captcha-btn').style.background = '#f0fdf4';
+            }, 1000);
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') attemptLogin();
+        }
+
+        function attemptLogin() {
+            const input = document.getElementById('password-input').value;
+            const error = document.getElementById('error-msg');
+            
+            if (input === CORRECT_PASS && isCaptchaVerified) {
+                // Success
+                sessionStorage.setItem('auth', 'true');
+                const gate = document.getElementById('security-gate');
+                gate.style.opacity = '0';
+                setTimeout(() => {
+                    gate.classList.add('hidden');
+                    document.getElementById('body-el').classList.remove('overflow-hidden');
+                }, 500);
+            } else {
+                // Fail
+                error.classList.remove('hidden');
+                // Shake animation logic could go here
+                if(!isCaptchaVerified) {
+                    error.innerText = "Bitte bestätigen Sie, dass Sie ein Mensch sind.";
+                } else {
+                    error.innerText = "Das Passwort ist falsch.";
+                }
+            }
+        }
+
         // --- DATA STORE ---
         // Consolidating all data from the provided report
         const resumeData = {
