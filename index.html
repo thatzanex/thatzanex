@@ -6,6 +6,8 @@
     <title>Interaktives Profil | Batu Atakan Erol</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Cloudflare Turnstile API -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -40,42 +42,6 @@
             transition: opacity 0.5s ease-out, visibility 0.5s;
         }
         #security-gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        /* Mock Captcha */
-        .mock-captcha {
-            width: 300px;
-            height: 65px;
-            background: #f9f9f9;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            padding: 0 12px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .captcha-checkbox {
-            width: 28px;
-            height: 28px;
-            background: #fff;
-            border: 2px solid #c7c7c7;
-            border-radius: 2px;
-            margin-right: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .captcha-spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #dbdbdb;
-            border-top: 2px solid #3b82f6;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            display: none;
-        }
-        .captcha-checkmark { color: #10b981; font-size: 20px; display: none; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-stone-100 text-stone-800 font-sans antialiased overflow-hidden" id="body-el">
@@ -85,7 +51,7 @@
         <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-stone-200 text-center space-y-6">
             <div class="space-y-2">
                 <h2 class="text-2xl font-bold text-stone-900">Geschützter Bereich</h2>
-                <p class="text-stone-500 text-sm">Bitte Passwort eingeben und Identität bestätigen.</p>
+                <p class="text-stone-500 text-sm">Bitte Passwort eingeben und die Identität bestätigen.</p>
             </div>
 
             <div class="space-y-4 text-left">
@@ -94,16 +60,11 @@
                     class="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition"
                     onkeypress="if(event.key==='Enter') attemptLogin()">
                 
-                <div class="mock-captcha mx-auto mt-4" id="mock-captcha-btn" onclick="runCaptchaSimulation()">
-                    <div class="captcha-checkbox">
-                        <div class="captcha-spinner" id="c-spinner"></div>
-                        <div class="captcha-checkmark" id="c-check">✔</div>
-                    </div>
-                    <div class="text-sm text-stone-700">Ich bin ein Mensch</div>
-                    <div class="ml-auto flex flex-col items-center">
-                        <span class="text-orange-500 text-xl">☁</span>
-                        <span class="text-[8px] text-stone-400">Turnstile</span>
-                    </div>
+                <!-- Echtes Cloudflare Turnstile Widget -->
+                <div class="flex justify-center mt-4">
+                    <div class="cf-turnstile" 
+                         data-sitekey="0x4AAAAAACTp9mTuVD-H0e8B" 
+                         data-callback="onTurnstileSuccess"></div>
                 </div>
 
                 <p id="error-msg" class="text-red-500 text-sm hidden text-center"></p>
@@ -111,9 +72,9 @@
 
             <button onclick="attemptLogin()" 
                 class="w-full bg-stone-900 text-white font-bold py-3 rounded-lg hover:bg-amber-600 transition duration-300 shadow-md">
-                Anmelden
+                Zugriff anfordern
             </button>
-            <p class="text-[10px] text-stone-400">Passwort-Tipp: batu2026</p>
+            <p class="text-[10px] text-stone-400">Hinweis: Zugriff nur für autorisierte Personen.</p>
         </div>
     </div>
 
@@ -176,43 +137,65 @@
     <script>
         // --- SECURITY ---
         let isCaptchaVerified = false;
-        const CORRECT_HASH = "ef2f3230678913165035d87178129f79621360156550215757756782337f7560";
+        const CORRECT_HASH = "ef2f3230678913165035d87178129f79621360156550215757756782337f7560"; // hash for batu2026
 
+        // Callback für Cloudflare Turnstile
+        window.onTurnstileSuccess = function(token) {
+            isCaptchaVerified = true;
+            const errMsg = document.getElementById('error-msg');
+            if (errMsg) errMsg.classList.add('hidden');
+        };
+
+        // Hilfsfunktion für Hash-Berechnung mit Fehlerbehandlung für Nicht-HTTPS Umgebungen
         async function hash(str) {
-            const utf8 = new TextEncoder().encode(str);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
-            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        function runCaptchaSimulation() {
-            if(isCaptchaVerified) return;
-            const s = document.getElementById('c-spinner'), c = document.getElementById('c-check');
-            s.style.display = 'block';
-            setTimeout(() => {
-                s.style.display = 'none'; c.style.display = 'block';
-                isCaptchaVerified = true;
-                document.getElementById('mock-captcha-btn').classList.add('bg-green-50', 'border-green-200');
-            }, 800);
-        }
-
-        async function attemptLogin() {
-            const input = document.getElementById('password-input').value;
-            const err = document.getElementById('error-msg');
-            const h = await hash(input);
-
-            if (h === CORRECT_HASH && isCaptchaVerified) {
-                sessionStorage.setItem('auth', 'true');
-                document.getElementById('security-gate').classList.add('hidden');
-                document.getElementById('body-el').classList.remove('overflow-hidden');
-            } else {
-                err.classList.remove('hidden');
-                err.innerText = !isCaptchaVerified ? "Captcha fehlt!" : "Falsches Passwort!";
+            try {
+                if (!window.crypto || !window.crypto.subtle) {
+                    throw new Error("Crypto API nicht verfügbar");
+                }
+                const utf8 = new TextEncoder().encode(str);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+                return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+            } catch (e) {
+                console.error("Hashing fehlgeschlagen:", e);
+                return null;
             }
         }
 
-        if(sessionStorage.getItem('auth') === 'true') {
-            document.getElementById('security-gate').classList.add('hidden');
-            document.getElementById('body-el').classList.remove('overflow-hidden');
+        async function attemptLogin() {
+            const inputField = document.getElementById('password-input');
+            const err = document.getElementById('error-msg');
+            const input = inputField ? inputField.value : "";
+            
+            if (!isCaptchaVerified) {
+                err.classList.remove('hidden');
+                err.innerText = "Bitte bestätigen Sie die Identität (Captcha)!";
+                return;
+            }
+
+            if (input === "") {
+                err.classList.remove('hidden');
+                err.innerText = "Passwort erforderlich!";
+                return;
+            }
+
+            const h = await hash(input);
+
+            if (h === null) {
+                err.classList.remove('hidden');
+                err.innerText = "Sicherheitsfehler: Bitte nutzen Sie einen modernen Browser oder HTTPS.";
+                return;
+            }
+
+            if (h === CORRECT_HASH) {
+                sessionStorage.setItem('auth', 'true');
+                const gate = document.getElementById('security-gate');
+                const body = document.getElementById('body-el');
+                if (gate) gate.classList.add('hidden');
+                if (body) body.classList.remove('overflow-hidden');
+            } else {
+                err.classList.remove('hidden');
+                err.innerText = "Falsches Passwort!";
+            }
         }
 
         // --- DATA ---
@@ -222,7 +205,9 @@
                 { id: 2, role: "IT-Soldat (FWD)", company: "Bundeswehr TSK CIR", period: "10/2024 – 08/2025", icon: "🛡️", details: ["SAT Com Systeme", "Militärische Disziplin", "Belastbarkeit unter Druck"] },
                 { id: 3, role: "Mittlere Reife", company: "Adorno Gymnasium", period: "08/2016 – 07/2024", icon: "🎓", details: ["Abschluss am Gymnasium"] },
                 { id: 4, role: "IT-Praktikum", company: "adesso SE", period: "01/2024", icon: "💻", details: ["Web-Entwicklung", "API-Systeme"] },
-                { id: 5, role: "Nanotechnologie Summer School", company: "Sabanci Uni Istanbul", period: "08/2023", icon: "🔬", details: ["Wissenschaftliche Einblicke"] }
+                { id: 5, role: "Nanotechnologie Summer School", company: "Sabanci Uni Istanbul", period: "08/2023", icon: "🔬", details: ["Wissenschaftliche Einblicke"] },
+                { id: 6, role: "Schülerpraktikum IT Support", company: "Celebi Cargo", period: "11/2020", icon: "✈️", details: ["IT Support und Management"] },
+                { id: 7, role: "Schnupperpraktikum", company: "Aramark Refreshment", period: "03/2018", icon: "🍽️", details: ["Berufswelt kennengelernt"] }
             ],
             skills: [
                 { name: "JavaScript", cat: "dev", val: 85 }, { name: "Python", cat: "dev", val: 75 },
@@ -236,6 +221,8 @@
         // --- RENDER ---
         function renderTimeline() {
             const container = document.getElementById('timeline-container');
+            if (!container) return;
+            container.innerHTML = '<div class="absolute left-4 top-2 bottom-2 w-0.5 bg-stone-100"></div>';
             resumeData.timeline.forEach(item => {
                 const el = document.createElement('div');
                 el.className = "relative pl-8 pb-2";
@@ -243,11 +230,11 @@
                     <div class="absolute left-[13px] top-1.5 w-3 h-3 rounded-full bg-amber-500 border-2 border-white z-10"></div>
                     <div class="bg-white border border-stone-100 p-4 rounded-xl shadow-sm hover:shadow-md transition cursor-default">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-stone-900">${item.icon} ${item.role}</h3>
-                            <span class="text-[10px] font-mono bg-stone-100 px-2 py-0.5 rounded">${item.period}</span>
+                            <h3 class="font-bold text-stone-900 text-sm">${item.icon} ${item.role}</h3>
+                            <span class="text-[9px] font-mono bg-stone-100 px-2 py-0.5 rounded">${item.period}</span>
                         </div>
-                        <p class="text-xs text-stone-500 mb-2 font-medium">${item.company}</p>
-                        <ul class="text-[11px] text-stone-600 space-y-1">
+                        <p class="text-[11px] text-stone-500 mb-2 font-medium">${item.company}</p>
+                        <ul class="text-[10px] text-stone-600 space-y-1">
                             ${item.details.map(d => `<li>• ${d}</li>`).join('')}
                         </ul>
                     </div>
@@ -258,13 +245,14 @@
 
         function filterSkills(cat) {
             const list = document.getElementById('skills-list');
+            if (!list) return;
             list.innerHTML = '';
             const filtered = cat === 'all' ? resumeData.skills : resumeData.skills.filter(s => s.cat === cat);
             filtered.forEach(s => {
                 const row = document.createElement('div');
                 row.className = "flex items-center gap-4 text-xs";
                 row.innerHTML = `
-                    <div class="w-24 font-semibold text-stone-700">${s.name}</div>
+                    <div class="w-24 font-semibold text-stone-700 text-[11px]">${s.name}</div>
                     <div class="flex-grow h-1.5 bg-stone-100 rounded-full overflow-hidden">
                         <div class="h-full bg-amber-500" style="width: ${s.val}%"></div>
                     </div>
@@ -273,13 +261,17 @@
             });
             
             document.querySelectorAll('#skill-filters button').forEach(b => {
-                b.classList.toggle('bg-stone-800', b.getAttribute('onclick').includes(`'${cat}'`));
-                b.classList.toggle('text-white', b.getAttribute('onclick').includes(`'${cat}'`));
+                const isSelected = b.getAttribute('onclick').includes(`'${cat}'`);
+                b.classList.toggle('bg-stone-800', isSelected);
+                b.classList.toggle('text-white', isSelected);
+                b.classList.toggle('bg-stone-100', !isSelected);
             });
         }
 
         function initCharts() {
-            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const chartEl = document.getElementById('skillsChart');
+            if (!chartEl) return;
+            const ctx = chartEl.getContext('2d');
             new Chart(ctx, {
                 type: 'radar',
                 data: {
@@ -300,6 +292,12 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            if(sessionStorage.getItem('auth') === 'true') {
+                const gate = document.getElementById('security-gate');
+                const body = document.getElementById('body-el');
+                if (gate) gate.classList.add('hidden');
+                if (body) body.classList.remove('overflow-hidden');
+            }
             renderTimeline();
             filterSkills('all');
             initCharts();
