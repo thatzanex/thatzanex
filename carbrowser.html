@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiveM Auto Hub - Server Vehicle Directory</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for GTA Vibe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        gta: ['"Bebas Neue"', 'cursive'],
+                        sans: ['"Chakra Petch"', 'sans-serif'],
+                    },
+                    colors: {
+                        gta: {
+                            dark: '#0a0a0c',
+                            panel: '#15171e',
+                            green: '#4ade80', // Classic money/health green
+                            orange: '#ff7b00',
+                            border: '#2a2d3a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0c;
+            background-image: 
+                linear-gradient(rgba(10, 10, 12, 0.9), rgba(10, 10, 12, 0.9)),
+                url('https://www.transparenttextures.com/patterns/cubes.png');
+            color: #e2e8f0;
+            overflow-y: scroll;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2d3a;
+            border-radius: 0px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4ade80;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Slanted GTA Style Elements */
+        .gta-skew {
+            transform: skewX(-10deg);
+        }
+        .gta-unskew {
+            transform: skewX(10deg);
+        }
+
+        .vehicle-card {
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vehicle-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #4ade80;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+
+        .vehicle-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+            border-color: #4ade80;
+            box-shadow: 0 10px 20px -5px rgba(74, 222, 128, 0.1);
+        }
+
+        /* Toast notification */
+        #toast {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans pb-16">
+
+    <!-- Header / Banner -->
+    <header class="bg-gta-panel border-b border-gta-border shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div>
+        <div class="max-w-7xl mx-auto px-4 py-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="bg-gta-green text-gta-dark p-3 rounded-lg gta-skew shadow-[0_0_15px_rgba(74,222,128,0.3)]">
+                        <i class="fa-solid fa-car-side text-3xl gta-unskew"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-5xl font-gta tracking-wider text-white uppercase drop-shadow-lg">
+                            Los Santos <span class="text-gta-green">Auto Hub</span>
+                        </h1>
+                        <p class="text-slate-400 font-semibold tracking-wide uppercase text-sm mt-1">
+                            <i class="fa-solid fa-server mr-1"></i> Authorized Dealer & Spawn Directory
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Search Box -->
+                <div class="w-full md:w-96 relative gta-skew">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none gta-unskew">
+                        <i class="fa-solid fa-search text-gta-green"></i>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        class="w-full bg-gta-dark border-2 border-gta-border text-white px-4 py-3 pl-12 focus:outline-none focus:border-gta-green transition-colors font-bold uppercase placeholder-slate-600 rounded-sm"
+                        placeholder="Search Vehicles or Codes..."
+                    >
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories / Brands Filter -->
+    <div class="max-w-7xl mx-auto px-4 mt-8">
+        <div class="flex items-center gap-3 mb-2">
+            <i class="fa-solid fa-filter text-slate-500"></i>
+            <h3 class="text-slate-400 font-gta text-2xl tracking-wide">Filter by Brand</h3>
+        </div>
+        <div class="flex overflow-x-auto pb-4 gap-3 no-scrollbar" id="categoryContainer">
+            <!-- Categories injected here -->
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 mt-6" id="vehiclesContainer">
+        <!-- Vehicle grid injected here -->
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 bg-gta-panel border-l-4 border-gta-green text-white px-6 py-4 rounded shadow-2xl flex items-center gap-3 z-50">
+        <i class="fa-solid fa-circle-check text-gta-green text-xl"></i>
+        <div>
+            <h4 class="font-gta text-xl tracking-wide mb-0 leading-none">Code Copied</h4>
+            <p class="text-sm text-slate-400 font-bold font-mono mt-1" id="toastMessage">spawn_code</p>
+        </div>
+    </div>
+
+    <script>
+        // Vehicle Data
+        const vehicleData = [
+            // Custom Pack
+            { spawn: '22m5', name: '2022 BMW M5', category: 'Custom Pack' },
+            { spawn: '328nii', name: 'BMW 328i', category: 'Custom Pack' },
+            { spawn: 'a90sh1', name: 'Toyota Supra A90', category: 'Custom Pack' },
+            { spawn: 'bmdrift', name: 'BMW Drift Spec', category: 'Custom Pack' },
+            { spawn: 'bmwm82', name: 'BMW M8', category: 'Custom Pack' },
+            { spawn: 'cookiehgks', name: 'Cookie HGK Eurofighter', category: 'Custom Pack' },
+            { spawn: 'cookiem5', name: 'Cookie BMW M5', category: 'Custom Pack' },
+            { spawn: 'e36rb', name: 'BMW E36 Rocket Bunny', category: 'Custom Pack' },
+            { spawn: 'e92lb', name: 'BMW E92 Liberty Walk', category: 'Custom Pack' },
+            { spawn: 'g20wide', name: 'BMW G20 Widebody', category: 'Custom Pack' },
+            { spawn: 'gtr50', name: 'Nissan GTR-50', category: 'Custom Pack' },
+            { spawn: 'gtrcw', name: 'Nissan GTR CW', category: 'Custom Pack' },
+            { spawn: 'gtrlb2', name: 'Nissan GTR Liberty Walk', category: 'Custom Pack' },
+            { spawn: 'is350mod1', name: 'Lexus IS350 Modified', category: 'Custom Pack' },
+            { spawn: 'lfa', name: 'Lexus LFA', category: 'Custom Pack' },
+            { spawn: 'm3tp', name: 'BMW M3 TP', category: 'Custom Pack' },
+            { spawn: 'MGT', name: 'Mustang GT Custom', category: 'Custom Pack' },
+            { spawn: 'mk7pandem', name: 'VW Golf MK7 Pandem', category: 'Custom Pack' },
+            { spawn: 'pd458wb', name: 'Ferrari 458 Widebody', category: 'Custom Pack' },
+            { spawn: 'rs62', name: 'Audi RS6 C8', category: 'Custom Pack' },
+            { spawn: 's13stance', name: 'Nissan S13 Stance', category: 'Custom Pack' },
+            { spawn: 's14', name: 'Nissan S14', category: 'Custom Pack' },
+            { spawn: 'stingergt1', name: 'Kia Stinger GT', category: 'Custom Pack' },
+            { spawn: 'taxi2', name: 'Custom Taxi', category: 'Custom Pack' },
+            { spawn: 'toy86', name: 'Toyota 86', category: 'Custom Pack' },
+            { spawn: 'toysupmk4drift', name: 'Toyota Supra MK4 Drift', category: 'Custom Pack' },
+
+            // Aston
+            { spawn: 'ast', name: 'Aston Martin', category: 'Aston Martin' },
+            { spawn: 'AstonValhalla', name: 'Aston Martin Valhalla', category: 'Aston Martin' },
+            { spawn: 'dbx', name: 'Aston Martin DBX', category: 'Aston Martin' },
+            { spawn: 'superleggera', name: 'Aston Martin Superleggera', category: 'Aston Martin' },
+
+            // Audi
+            { spawn: 'AudiQ8', name: 'Audi Q8', category: 'Audi' },
+            { spawn: 'AudiR8', name: 'Audi R8', category: 'Audi' },
+            { spawn: 'AudiS8', name: 'Audi S8', category: 'Audi' },
+            { spawn: 'AudiSQ7', name: 'Audi SQ7', category: 'Audi' },
+            { spawn: 'F103', name: 'Audi F103', category: 'Audi' },
+            { spawn: 'RS5', name: 'Audi RS5', category: 'Audi' },
+            { spawn: 'rs6', name: 'Audi RS6', category: 'Audi' },
+            { spawn: 'RS7', name: 'Audi RS7', category: 'Audi' },
+
+            // Avion (Planes)
+            { spawn: 'a321cfm', name: 'Airbus A321', category: 'Aviation' },
+            { spawn: 'a350x', name: 'Airbus A350 XWB', category: 'Aviation' },
+            { spawn: 'hongyiteam', name: 'Hongyi Team Plane', category: 'Aviation' },
+
+            // Bateau (Boats)
+            { spawn: 'dtd_jetskis', name: 'DTD Jet Skis', category: 'Boats' },
+            { spawn: 'redjet', name: 'Red Jetboat', category: 'Boats' },
+            { spawn: 'sr650fly', name: 'Sea Ray 650 Fly', category: 'Boats' },
+            { spawn: 'yacht2', name: 'Luxury Yacht', category: 'Boats' },
+
+            // Bentley
+            { spawn: 'ben17', name: 'Bentley Continental 2017', category: 'Bentley' },
+
+            // BMW
+            { spawn: '17m760i', name: 'BMW M760i 2017', category: 'BMW' },
+            { spawn: 'bmwe65', name: 'BMW E65', category: 'BMW' },
+            { spawn: 'e34', name: 'BMW E34', category: 'BMW' },
+            { spawn: 'i8', name: 'BMW i8', category: 'BMW' },
+            { spawn: 'm3e46', name: 'BMW M3 E46', category: 'BMW' },
+            { spawn: 'm5', name: 'BMW M5', category: 'BMW' },
+            { spawn: 'x5e53', name: 'BMW X5 E53', category: 'BMW' },
+            { spawn: 'x6m', name: 'BMW X6M', category: 'BMW' },
+
+            // Brabus
+            { spawn: 'Brabus700', name: 'Brabus 700', category: 'Brabus' },
+            { spawn: 'Brabus850', name: 'Brabus 850', category: 'Brabus' },
+            { spawn: 'MLbrabus', name: 'Mercedes ML Brabus', category: 'Brabus' },
+
+            // Bugatti
+            { spawn: '2019chiron', name: 'Bugatti Chiron 2019', category: 'Bugatti' },
+            { spawn: 'divo', name: 'Bugatti Divo', category: 'Bugatti' },
+
+            // Cadillac
+            { spawn: 'atsv', name: 'Cadillac ATS-V', category: 'Cadillac' },
+
+            // Dodge
+            { spawn: 'Charger2016', name: 'Dodge Charger 2016', category: 'Dodge' },
+            { spawn: 'chargerf8', name: 'Dodge Charger F8', category: 'Dodge' },
+            { spawn: 'ram2500', name: 'Dodge Ram 2500', category: 'Dodge' },
+            { spawn: 'trx', name: 'Ram 1500 TRX', category: 'Dodge' },
+            { spawn: 'Viper', name: 'Dodge Viper', category: 'Dodge' },
+
+            // Ferrari_Porshe
+            { spawn: 'F40', name: 'Ferrari F40', category: 'Ferrari / Porsche' },
+            { spawn: 'pm19', name: 'Porsche Macan 2019', category: 'Ferrari / Porsche' },
+            { spawn: 'porshe', name: 'Porsche 911', category: 'Ferrari / Porsche' },
+            { spawn: 'porshe2', name: 'Porsche Carrera', category: 'Ferrari / Porsche' },
+            { spawn: 'pturismo', name: 'Porsche Panamera Turismo', category: 'Ferrari / Porsche' },
+            { spawn: 'rmodf12tdf', name: 'Ferrari F12 TDF (RMOD)', category: 'Ferrari / Porsche' },
+
+            // Ford
+            { spawn: 'Bronco', name: 'Ford Bronco', category: 'Ford' },
+            { spawn: 'gt17', name: 'Ford GT 2017', category: 'Ford' },
+            { spawn: 'Mustang302', name: 'Ford Mustang Boss 302', category: 'Ford' },
+            { spawn: 'MustangGT', name: 'Ford Mustang GT', category: 'Ford' },
+            { spawn: 'MustangMach', name: 'Ford Mustang Mach-E', category: 'Ford' },
+            { spawn: 'v8', name: 'Ford V8 Classic', category: 'Ford' },
+
+            // Lamborghini
+            { spawn: 'AventadorJ', name: 'Lamborghini Aventador J', category: 'Lamborghini' },
+            { spawn: 'Lamborghini', name: 'Lamborghini Huracan', category: 'Lamborghini' },
+            { spawn: 'terzo', name: 'Lamborghini Terzo Millennio', category: 'Lamborghini' },
+            { spawn: 'Urus', name: 'Lamborghini Urus', category: 'Lamborghini' },
+
+            // Maserati
+            { spawn: 'Ghibli', name: 'Maserati Ghibli', category: 'Maserati' },
+            { spawn: 'Levante', name: 'Maserati Levante', category: 'Maserati' },
+            { spawn: 'Levante2', name: 'Maserati Levante Custom', category: 'Maserati' },
+
+            // McLaren
+            { spawn: '720s', name: 'McLaren 720S', category: 'McLaren' },
+            { spawn: 'Speedtail', name: 'McLaren Speedtail', category: 'McLaren' },
+
+            // Mercedes
+            { spawn: 'c63coupe', name: 'Mercedes C63 AMG Coupe', category: 'Mercedes' },
+            { spawn: 'c63w205', name: 'Mercedes C63 W205', category: 'Mercedes' },
+            { spawn: 'cls2015', name: 'Mercedes CLS 2015', category: 'Mercedes' },
+            { spawn: 'g65amg', name: 'Mercedes G65 AMG', category: 'Mercedes' },
+            { spawn: 'gle450', name: 'Mercedes GLE 450', category: 'Mercedes' },
+            { spawn: 'gt63s', name: 'Mercedes AMG GT63S', category: 'Mercedes' },
+            { spawn: 'macla', name: 'Mercedes McLaren SLR', category: 'Mercedes' },
+
+            // Moto
+            { spawn: 'bs17', name: 'BMW S1000RR 2017', category: 'Motorcycles' },
+            { spawn: 'Honda300', name: 'Honda CBR300R', category: 'Motorcycles' },
+            { spawn: 'NightBlade', name: 'Nightblade Custom', category: 'Motorcycles' },
+            { spawn: 'ninja250fi', name: 'Kawasaki Ninja 250 FI', category: 'Motorcycles' },
+            { spawn: 'R6', name: 'Yamaha YZF-R6', category: 'Motorcycles' },
+            { spawn: 'RC16', name: 'KTM RC16', category: 'Motorcycles' },
+            { spawn: 'tmax', name: 'Yamaha TMAX', category: 'Motorcycles' },
+            { spawn: 'YZFR1', name: 'Yamaha YZF-R1', category: 'Motorcycles' },
+            { spawn: 'ZH2', name: 'Kawasaki Z H2', category: 'Motorcycles' },
+
+            // Pagani
+            { spawn: 'Pagani', name: 'Pagani Huayra', category: 'Pagani' },
+
+            // Unbranded / Mixed
+            { spawn: '18Velar', name: 'Range Rover Velar 2018', category: 'Other & Mixed' },
+            { spawn: 'ap2', name: 'Honda S2000 AP2', category: 'Other & Mixed' },
+            { spawn: 'Camaro', name: 'Chevrolet Camaro', category: 'Other & Mixed' },
+            { spawn: 'Chevrolet', name: 'Chevrolet Generic', category: 'Other & Mixed' },
+            { spawn: 'corvette', name: 'Chevrolet Corvette', category: 'Other & Mixed' },
+            { spawn: 'duetto', name: 'Alfa Romeo Duetto', category: 'Other & Mixed' },
+            { spawn: 'eleghy', name: 'Elegy Retro Custom', category: 'Other & Mixed' },
+            { spawn: 'FK8', name: 'Honda Civic Type R FK8', category: 'Other & Mixed' },
+            { spawn: 'Golf', name: 'VW Golf', category: 'Other & Mixed' },
+            { spawn: 'GolfMK8', name: 'VW Golf MK8', category: 'Other & Mixed' },
+            { spawn: 'gom_m420', name: 'GOM M420', category: 'Other & Mixed' },
+            { spawn: 'GrottiCheetah', name: 'Grotti Cheetah Classic', category: 'Other & Mixed' },
+            { spawn: 'GrottiItali', name: 'Grotti Itali RSX', category: 'Other & Mixed' },
+            { spawn: 'Jaguar', name: 'Jaguar F-Type', category: 'Other & Mixed' },
+            { spawn: 'lex570', name: 'Lexus LX 570', category: 'Other & Mixed' },
+            { spawn: 'lx2018', name: 'Lexus LX 2018', category: 'Other & Mixed' },
+            { spawn: 'rmodcharger69', name: 'Dodge Charger 1969 (RMOD)', category: 'Other & Mixed' },
+            { spawn: 'skyline', name: 'Nissan Skyline R34', category: 'Other & Mixed' },
+            { spawn: 'srt8', name: 'Jeep Grand Cherokee SRT8', category: 'Other & Mixed' },
+            { spawn: 'vip8', name: 'VIP Luxury Sedan', category: 'Other & Mixed' },
+
+            // Volkswagen
+            { spawn: 'a45', name: 'Mercedes A45 (VW Pack)', category: 'Volkswagen' },
+            { spawn: 'polo2018', name: 'VW Polo 2018', category: 'Volkswagen' },
+            { spawn: 'r50', name: 'VW Touareg R50', category: 'Volkswagen' },
+            { spawn: 'sciroccos81', name: 'VW Scirocco S81', category: 'Volkswagen' }
+        ];
+
+        // State
+        let currentSearch = '';
+        let currentCategory = 'All';
+
+        // Extract unique categories and sort them (Keeping Custom Pack first)
+        const rawCategories = [...new Set(vehicleData.map(v => v.category))];
+        const sortedCategories = rawCategories.sort((a, b) => {
+            if (a === 'Custom Pack') return -1;
+            if (b === 'Custom Pack') return 1;
+            return a.localeCompare(b);
+        });
+        const categories = ['All', ...sortedCategories];
+
+        // DOM Elements
+        const searchInput = document.getElementById('searchInput');
+        const categoryContainer = document.getElementById('categoryContainer');
+        const vehiclesContainer = document.getElementById('vehiclesContainer');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // Event Listeners
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase();
+            renderVehicles();
+        });
+
+        // Initialize App
+        function init() {
+            renderCategories();
+            renderVehicles();
+        }
+
+        // Render Category Filter Buttons
+        function renderCategories() {
+            categoryContainer.innerHTML = categories.map(cat => {
+                const isActive = cat === currentCategory;
+                const baseClasses = "px-6 py-2 rounded-sm font-bold uppercase tracking-wider text-sm whitespace-nowrap transition-all border-2 gta-skew cursor-pointer select-none flex items-center gap-2";
+                const activeClasses = isActive 
+                    ? "bg-gta-green border-gta-green text-gta-dark shadow-[0_0_15px_rgba(74,222,128,0.2)]" 
+                    : "bg-gta-panel border-gta-border text-slate-400 hover:border-slate-500 hover:text-white";
+                
+                return `
+                    <div class="${baseClasses} ${activeClasses}" onclick="setCategory('${cat}')">
+                        <span class="gta-unskew block">${cat}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Set Category and Re-render
+        window.setCategory = (cat) => {
+            currentCategory = cat;
+            renderCategories();
+            renderVehicles();
+        }
+
+        // Get Icon based on Category
+        function getIconForCategory(cat) {
+            if (cat === 'Aviation') return '<i class="fa-solid fa-plane"></i>';
+            if (cat === 'Boats') return '<i class="fa-solid fa-ship"></i>';
+            if (cat === 'Motorcycles') return '<i class="fa-solid fa-motorcycle"></i>';
+            return '<i class="fa-solid fa-car"></i>';
+        }
+
+        // Render Vehicles Grouped by Brand
+        function renderVehicles() {
+            // Filter Data
+            const filtered = vehicleData.filter(v => {
+                const matchesSearch = v.name.toLowerCase().includes(currentSearch) || v.spawn.toLowerCase().includes(currentSearch);
+                const matchesCategory = currentCategory === 'All' || v.category === currentCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            if (filtered.length === 0) {
+                vehiclesContainer.innerHTML = `
+                    <div class="py-20 text-center">
+                        <i class="fa-solid fa-car-burst text-6xl text-gta-border mb-4"></i>
+                        <h2 class="font-gta text-3xl text-slate-400 tracking-wider">No Vehicles Found</h2>
+                        <p class="text-slate-500 mt-2 font-bold uppercase">Adjust your filters or search term.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group by Category
+            const grouped = {};
+            filtered.forEach(v => {
+                if (!grouped[v.category]) grouped[v.category] = [];
+                grouped[v.category].push(v);
+            });
+
+            // Sort Groups to match the original category order
+            const groupKeys = Object.keys(grouped).sort((a, b) => {
+                if (a === 'Custom Pack') return -1;
+                if (b === 'Custom Pack') return 1;
+                return a.localeCompare(b);
+            });
+
+            // Build HTML
+            let html = '';
+            groupKeys.forEach(category => {
+                const vehicles = grouped[category];
+                const icon = getIconForCategory(category);
+                
+                html += `
+                    <div class="mb-12">
+                        <!-- Section Header -->
+                        <div class="flex items-center gap-4 mb-6 border-b border-gta-border pb-2">
+                            <div class="text-gta-green text-2xl">${icon}</div>
+                            <h2 class="font-gta text-4xl text-white tracking-widest uppercase">${category}</h2>
+                            <div class="ml-auto bg-gta-panel text-slate-400 px-3 py-1 rounded text-sm font-bold border border-gta-border">
+                                ${vehicles.length} VEHICLES
+                            </div>
+                        </div>
+                        
+                        <!-- Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            ${vehicles.map(v => `
+                                <div class="vehicle-card bg-gta-panel border border-gta-border p-5 rounded-sm flex flex-col justify-between h-full">
+                                    <div class="mb-4">
+                                        <h3 class="font-gta text-2xl text-white tracking-wide leading-tight mb-1">${v.name}</h3>
+                                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider mb-3">
+                                            Brand: <span class="text-slate-300">${v.category}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-auto">
+                                        <div class="bg-gta-dark p-3 rounded-sm border border-black flex justify-between items-center group/code">
+                                            <div class="font-mono text-gta-orange font-bold truncate pr-4">
+                                                ${v.spawn}
+                                            </div>
+                                            <button 
+                                                onclick="copySpawnCode('${v.spawn}')"
+                                                class="text-slate-400 hover:text-gta-green transition-colors cursor-pointer p-2"
+                                                title="Copy Spawn Code"
+                                            >
+                                                <i class="fa-solid fa-copy text-lg"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            vehiclesContainer.innerHTML = html;
+        }
+
+        // Copy functionality with visual feedback
+        let toastTimeout;
+        window.copySpawnCode = (text) => {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => showToast(text));
+            } else {
+                // Fallback
+                let textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast(text);
+                } catch (err) {
+                    console.error('Copy failed', err);
+                }
+                textArea.remove();
+            }
+        };
+
+        function showToast(text) {
+            toastMessage.textContent = text;
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Run
+        init();
+
+    </script>
+</body>
+</html>
