@@ -48,7 +48,7 @@
             overflow-y: scroll;
         }
 
-        /* Custom Scrollbar */
+        /* Main Page Vertical Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -63,12 +63,20 @@
             background: #4ade80;
         }
 
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        /* Horizontal Scrollbar specifically for Categories */
+        #categoryContainer::-webkit-scrollbar {
+            height: 6px;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        #categoryContainer::-webkit-scrollbar-track {
+            background: #15171e;
+            border-radius: 10px;
+        }
+        #categoryContainer::-webkit-scrollbar-thumb {
+            background: #4ade80;
+            border-radius: 10px;
+        }
+        #categoryContainer::-webkit-scrollbar-thumb:hover {
+            background: #22c55e;
         }
 
         /* Slanted GTA Style Elements */
@@ -158,11 +166,12 @@
 
     <!-- Categories / Brands Filter -->
     <div class="max-w-7xl mx-auto px-4 mt-8">
-        <div class="flex items-center gap-3 mb-2">
+        <div class="flex items-center gap-3 mb-4">
             <i class="fa-solid fa-filter text-slate-500"></i>
             <h3 class="text-slate-400 font-gta text-2xl tracking-wide">Filter by Brand</h3>
         </div>
-        <div class="flex overflow-x-auto pb-4 gap-3 no-scrollbar" id="categoryContainer">
+        <!-- Note: no-scrollbar is removed, flex-shrink-0 added in JS -->
+        <div class="flex overflow-x-auto pb-4 gap-3 scroll-smooth" id="categoryContainer">
             <!-- Categories injected here -->
         </div>
     </div>
@@ -182,7 +191,7 @@
     </div>
 
     <script>
-        // Vehicle Data
+        // Vehicle Data (All 127 Vehicles)
         const vehicleData = [
             // Custom Pack
             { spawn: '22m5', name: '2022 BMW M5', category: 'Custom Pack' },
@@ -380,6 +389,14 @@
             renderVehicles();
         });
 
+        // Mouse Wheel Horizontal Scroll Event
+        categoryContainer.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault(); // Stop vertical scroll on page
+                categoryContainer.scrollLeft += e.deltaY > 0 ? 100 : -100;
+            }
+        }, { passive: false });
+
         // Initialize App
         function init() {
             renderCategories();
@@ -390,7 +407,8 @@
         function renderCategories() {
             categoryContainer.innerHTML = categories.map(cat => {
                 const isActive = cat === currentCategory;
-                const baseClasses = "px-6 py-2 rounded-sm font-bold uppercase tracking-wider text-sm whitespace-nowrap transition-all border-2 gta-skew cursor-pointer select-none flex items-center gap-2";
+                // ADDED flex-shrink-0 to prevent squishing
+                const baseClasses = "flex-shrink-0 px-6 py-2 rounded-sm font-bold uppercase tracking-wider text-sm whitespace-nowrap transition-all border-2 gta-skew cursor-pointer select-none flex items-center gap-2";
                 const activeClasses = isActive 
                     ? "bg-gta-green border-gta-green text-gta-dark shadow-[0_0_15px_rgba(74,222,128,0.2)]" 
                     : "bg-gta-panel border-gta-border text-slate-400 hover:border-slate-500 hover:text-white";
