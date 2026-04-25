@@ -95,30 +95,28 @@ const HomeView: React.FC<HomeViewProps> = ({ navigate }) => (
           >
             {/* Style thumbnail */}
             <div className="h-44 relative overflow-hidden bg-[#050505] flex items-center justify-center">
-              {style.image ? (
-                <img
-                  src={style.image}
-                  alt={style.name}
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                />
-              ) : (
-                <>
-                  <span className="absolute -left-3 -bottom-3 text-neutral-800/60 font-mono text-8xl font-black select-none leading-none">
-                    0{i + 1}
-                  </span>
-                  <div
-                    className="absolute inset-0 opacity-[0.04]"
-                    style={{
-                      backgroundImage:
-                        'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-                      backgroundSize: '24px 24px',
-                    }}
-                  />
-                  <span className="text-neutral-700 font-mono text-xs tracking-[0.4em] uppercase z-10">
-                    No Image
-                  </span>
-                </>
-              )}
+              <img
+                src={`${import.meta.env.BASE_URL}images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`}
+                alt={style.name}
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).parentElement!.classList.add('bg-neutral-950');
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
+              
+              {/* Fallback pattern (visible if image fails) */}
+              <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
+                style={{
+                  backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+                  backgroundSize: '24px 24px',
+                }}
+              />
+              
+              {/* Subtle number watermark */}
+              <span className="absolute -left-3 -bottom-3 text-neutral-800/40 font-mono text-8xl font-black select-none leading-none z-10">
+                0{i + 1}
+              </span>
               {/* Gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
             </div>
