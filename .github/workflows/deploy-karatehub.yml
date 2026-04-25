@@ -3,7 +3,7 @@ name: Deploy KarateHub
 on:
   push:
     paths:
-      - 'karate/**'
+      - 'karate-source/**'
     branches:
       - main
 
@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build-and-deploy:
-    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -20,13 +20,13 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          cd karate
+          cd karate-source
           npm install
           npm run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: karate/dist # The folder the action should deploy.
+          folder: karate-source/dist # The folder the action should deploy.
           target-folder: karate # The folder in the branch to deploy to.
-          branch: gh-pages # The branch the action should deploy to.
+          branch: main # Deploy directly back to the main branch's karate folder
