@@ -45,7 +45,7 @@ const StyleDetailsView: React.FC<StyleDetailsViewProps> = ({ styleName, navigate
           <img 
             src={style.imageBanner || `${import.meta.env.BASE_URL}images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`} 
             alt={`${style.name} banner`} 
-            className="w-full h-full object-cover opacity-90"
+            className="w-full h-full object-cover object-top opacity-90"
             onError={(e) => {
               (e.target as HTMLImageElement).style.display = 'none';
               // If image fails, the BannerPlaceholder logic below handles it

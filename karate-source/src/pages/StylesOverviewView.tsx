@@ -68,7 +68,7 @@ const StylesOverviewView: React.FC<StylesOverviewViewProps> = ({ navigate }) => 
                 <img
                   src={`${import.meta.env.BASE_URL}images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`}
                   alt={style.name}
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 scale-110 group-hover:scale-100"
+                  className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-all duration-500 scale-110 group-hover:scale-100"
                   onError={(e) => {
                     (e.target as HTMLImageElement).parentElement!.classList.add('bg-neutral-900');
                     (e.target as HTMLImageElement).style.display = 'none';

@@ -83,7 +83,7 @@ export const StyleSelector: React.FC<StyleSelectorProps> = ({
                 <img 
                   src={`${import.meta.env.BASE_URL}images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`} 
                   alt={style.name}
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
+                  className="w-full h-full object-cover object-top opacity-60 group-hover:opacity-100 transition-opacity"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}

@@ -98,7 +98,7 @@ const HomeView: React.FC<HomeViewProps> = ({ navigate }) => (
               <img
                 src={`${import.meta.env.BASE_URL}images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`}
                 alt={style.name}
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                 onError={(e) => {
                   (e.target as HTMLImageElement).parentElement!.classList.add('bg-neutral-950');
                   (e.target as HTMLImageElement).style.display = 'none';
