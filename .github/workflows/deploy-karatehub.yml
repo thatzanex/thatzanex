@@ -3,7 +3,7 @@ name: Deploy KarateHub
 on:
   push:
     paths:
-      - 'KarateHub/**'
+      - 'karate/**'
     branches:
       - main
 
@@ -20,13 +20,13 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          cd KarateHub
+          cd karate
           npm install
           npm run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: KarateHub/dist # The folder the action should deploy.
-          target-folder: KarateHub # The folder in the branch to deploy to.
+          folder: karate/dist # The folder the action should deploy.
+          target-folder: karate # The folder in the branch to deploy to.
           branch: gh-pages # The branch the action should deploy to.
