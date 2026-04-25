@@ -1,10 +1,11 @@
+import React from 'react';
 import { ChevronRight, X, Crosshair, Zap, Shield, ArrowLeftRight, Users } from 'lucide-react';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import SectionHeader from '../components/ui/SectionHeader';
 import { StyleSelector } from '../components/ui/StyleSelector';
 import { useStyles } from '../hooks/useStyles';
-import type { MatchupEntry, StyleData } from '../types';
+import type { MatchupEntry } from '../types';
 
 
 interface MatchupGuideViewProps {
