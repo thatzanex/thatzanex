@@ -1,0 +1,2107 @@
+{
+  "Kung Fu": {
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.8 studs vs 4.1 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (18 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Slower attack delay (0.125s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.8 studs vs 4.25 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (18 studs/s vs 17.95)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.25 studs)",
+        "Slower attack delay (0.125s)",
+        "Slower mobility (17.95 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.125s vs 0.185s)",
+        "Higher walk speed during attacks (18 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.8 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (18 studs/s vs 16)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.125s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.8 studs vs 4.15 studs)",
+        "Faster fastest attack delay (0.125s vs 0.135s)",
+        "Higher walk speed during attacks (18 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.15 studs)",
+        "Opponent attacks faster (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.8 studs vs 4.5 studs)",
+        "Faster fastest attack delay (0.125s vs 0.14s)",
+        "Higher walk speed during attacks (18 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.5 studs)",
+        "Opponent attacks faster (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.8 studs vs 4.5 studs)",
+        "Faster fastest attack delay (0.125s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.5 studs)",
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (18 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.8 studs vs 4.45 studs)",
+        "Faster fastest attack delay (0.125s vs 0.13s)",
+        "Higher walk speed during attacks (18 studs/s vs 17)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.45 studs)",
+        "Opponent attacks faster (0.13s)",
+        "Slower mobility (17 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (18 studs/s vs 16)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Slower attack delay (0.125s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.8 studs vs 4.54 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (18 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.54 studs)",
+        "Slower attack delay (0.125s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    }
+  },
+  "Muay Thai": {
+    "Kung Fu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.125s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.8 studs)",
+        "Opponent attacks faster (0.125s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Play defensively and counter",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent moves faster; rely on range or pressure to avoid chase",
+        "Recover from guard break faster (1.5s vs 2.5s)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.25 studs)",
+        "Slower mobility (15.5 studs/s)",
+        "Opponent suffers longer guard break (2.5s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately",
+        "Chain attacks right after blocking"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.185s)",
+        "Higher walk speed during attacks (15.5 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Chain attacks right after blocking"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.1 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.11s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.135s)",
+        "Higher walk speed during attacks (15.5 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.15 studs)",
+        "Opponent attacks faster (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.14s)",
+        "Recover from guard break faster (1.5s vs 2.4s)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.14s)",
+        "Opponent suffers longer guard break (2.4s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.13s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.45 studs)",
+        "Opponent attacks faster (0.13s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.12s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Opponent attacks faster (0.12s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (15.5 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.54 studs)",
+        "Slower attack delay (0.11s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    }
+  },
+  "Kyokushin": {
+    "Kung Fu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.125s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.8 studs)",
+        "Opponent attacks faster (0.125s)",
+        "Slower mobility (17.95 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.25 studs vs 4.1 studs)",
+        "Higher walk speed during attacks (17.95 studs/s vs 15.5)",
+        "Opponent takes longer to recover from guard break (1.5s)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Slower mobility (15.5 studs/s)",
+        "Longer guard break (2.5s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.185s)",
+        "Higher walk speed during attacks (17.95 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.25 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (17.95 studs/s vs 16)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.11s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.25 studs vs 4.15 studs)",
+        "Faster fastest attack delay (0.11s vs 0.135s)",
+        "Higher walk speed during attacks (17.95 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.15 studs)",
+        "Opponent attacks faster (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.14s)",
+        "Higher walk speed during attacks (17.95 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (17.95 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.13s)",
+        "Higher walk speed during attacks (17.95 studs/s vs 17)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.45 studs)",
+        "Opponent attacks faster (0.13s)",
+        "Slower mobility (17 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.11s vs 0.12s)",
+        "Higher walk speed during attacks (17.95 studs/s vs 16)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Opponent attacks faster (0.12s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (17.95 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.54 studs)",
+        "Slower attack delay (0.11s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    }
+  },
+  "Wado-Ryu": {
+    "Kung Fu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4.8 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.8 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4.1 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4.25 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.25 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4.15 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Recover from guard break faster (1.5s vs 2s)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.15 studs)",
+        "Slower attack delay (0.185s)",
+        "Opponent suffers longer guard break (2s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4.5 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.5 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4.5 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.5 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4.45 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.45 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 5 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (5 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (6.3 studs vs 4.54 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (15 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.54 studs)",
+        "Slower attack delay (0.185s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    }
+  },
+  "Taekwondo": {
+    "Kung Fu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.125s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.8 studs)",
+        "Opponent attacks faster (0.125s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.11s)",
+        "Higher walk speed during attacks (16 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.1 studs)",
+        "Opponent attacks faster (0.11s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.11s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.25 studs)",
+        "Opponent attacks faster (0.11s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.185s)",
+        "Higher walk speed during attacks (16 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.135s)",
+        "Higher walk speed during attacks (16 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.15 studs)",
+        "Opponent attacks faster (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.14s)",
+        "Higher walk speed during attacks (16 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.13s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.45 studs)",
+        "Opponent attacks faster (0.13s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.12s)",
+        "Recover from guard break faster (1s vs 4s)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Opponent attacks faster (0.12s)",
+        "Opponent suffers longer guard break (4s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.05s vs 0.105s)",
+        "Higher walk speed during attacks (16 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.54 studs)",
+        "Opponent attacks faster (0.105s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    }
+  },
+  "Shorin-Ryu": {
+    "Kung Fu": {
+      "win_condition": "Play defensively and counter",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.8 studs)",
+        "Slower attack delay (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.15 studs vs 4.1 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Slower attack delay (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Play defensively and counter",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.25 studs)",
+        "Slower attack delay (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.135s vs 0.185s)",
+        "Opponent takes longer to recover from guard break (1.5s)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Longer guard break (2s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Punish opponent when their guard breaks",
+        "Chain attacks right after blocking"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.15 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.135s vs 0.14s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.14s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.135s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Play defensively and counter",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.45 studs)",
+        "Slower attack delay (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Play defensively and counter",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Slower attack delay (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (15 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.54 studs)",
+        "Slower attack delay (0.135s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    }
+  },
+  "Street Brawler": {
+    "Kung Fu": {
+      "win_condition": "Play defensively and counter",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.8 studs)",
+        "Slower attack delay (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4.1 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent takes longer to recover from guard break (1.5s)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Slower attack delay (0.14s)",
+        "Longer guard break (2.4s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Punish opponent when their guard breaks",
+        "Chain attacks right after blocking"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4.25 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.25 studs)",
+        "Slower attack delay (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.14s vs 0.185s)",
+        "Higher walk speed during attacks (15.5 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4.15 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (15.5 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.15 studs)",
+        "Slower attack delay (0.14s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Faster fastest attack delay (0.14s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase",
+        "Recover from guard break faster (2.4s vs 4.5s)"
+      ],
+      "their_weaknesses": [
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (15.5 studs/s)",
+        "Opponent suffers longer guard break (4.5s)"
+      ],
+      "tactics": [
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately",
+        "Chain attacks right after blocking"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4.45 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.45 studs)",
+        "Slower attack delay (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Play defensively and counter",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Slower attack delay (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (15.5 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.54 studs)",
+        "Slower attack delay (0.14s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    }
+  },
+  "Shotokan": {
+    "Kung Fu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 18)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.8 studs)",
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (18 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4.1 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4.25 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 17.95)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.25 studs)",
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (17.95 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.1485s vs 0.185s)",
+        "Higher walk speed during attacks (20 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 16)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4.15 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.15 studs)",
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 15.5)",
+        "Opponent takes longer to recover from guard break (2.4s)"
+      ],
+      "their_weaknesses": [
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (15.5 studs/s)",
+        "Longer guard break (4.5s)"
+      ],
+      "tactics": [
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.5 studs vs 4.45 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 17)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.45 studs)",
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (17 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 16)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (20 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.54 studs)",
+        "Slower attack delay (0.1485s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    }
+  },
+  "Tang Soo Do": {
+    "Kung Fu": {
+      "win_condition": "Play defensively and counter",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.8 studs)",
+        "Slower attack delay (0.13s)",
+        "Slower mobility (17 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.45 studs vs 4.1 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (17 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Slower attack delay (0.13s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.45 studs vs 4.25 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.25 studs)",
+        "Slower attack delay (0.13s)",
+        "Slower mobility (17 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.13s vs 0.185s)",
+        "Higher walk speed during attacks (17 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.45 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (17 studs/s vs 16)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.13s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.45 studs vs 4.15 studs)",
+        "Faster fastest attack delay (0.13s vs 0.135s)",
+        "Higher walk speed during attacks (17 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.15 studs)",
+        "Opponent attacks faster (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.13s vs 0.14s)",
+        "Higher walk speed during attacks (17 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.13s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.5 studs)",
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (17 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (17 studs/s vs 16)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Slower attack delay (0.13s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Kite using superior mobility",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (17 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.54 studs)",
+        "Slower attack delay (0.13s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "After a successful block, strike immediately"
+      ]
+    }
+  },
+  "Chito-Ryu": {
+    "Kung Fu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4.8 studs)",
+        "Faster fastest attack delay (0.12s vs 0.125s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.8 studs)",
+        "Opponent attacks faster (0.125s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4.1 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (16 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Slower attack delay (0.12s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4.25 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.25 studs)",
+        "Slower attack delay (0.12s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.12s vs 0.185s)",
+        "Higher walk speed during attacks (16 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent takes longer to recover from guard break (1s)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.12s)",
+        "Longer guard break (4s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Punish opponent when their guard breaks",
+        "Chain attacks right after blocking"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4.15 studs)",
+        "Faster fastest attack delay (0.12s vs 0.135s)",
+        "Higher walk speed during attacks (16 studs/s vs 15)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.15 studs)",
+        "Opponent attacks faster (0.135s)",
+        "Slower mobility (15 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4.5 studs)",
+        "Faster fastest attack delay (0.12s vs 0.14s)",
+        "Higher walk speed during attacks (16 studs/s vs 15.5)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.5 studs)",
+        "Opponent attacks faster (0.14s)",
+        "Slower mobility (15.5 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Kite opponent whose chase speed is lower",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4.5 studs)",
+        "Faster fastest attack delay (0.12s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.5 studs)",
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4.45 studs)",
+        "Faster fastest attack delay (0.12s vs 0.13s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.45 studs)",
+        "Opponent attacks faster (0.13s)",
+        "Slower mobility (16 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Gojo-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (5 studs vs 4.54 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Higher walk speed during attacks (16 studs/s vs 14)"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.54 studs)",
+        "Slower attack delay (0.12s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Kite opponent whose chase speed is lower",
+        "Chain attacks right after blocking"
+      ]
+    }
+  },
+  "Gojo-Ryu": {
+    "Kung Fu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.105s vs 0.125s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (4.8 studs)",
+        "Opponent attacks faster (0.125s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Muay Thai": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.54 studs vs 4.1 studs)",
+        "Faster fastest attack delay (0.105s vs 0.11s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.1 studs)",
+        "Opponent attacks faster (0.11s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Kyokushin": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.54 studs vs 4.25 studs)",
+        "Faster fastest attack delay (0.105s vs 0.11s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.25 studs)",
+        "Opponent attacks faster (0.11s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Wado-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.105s vs 0.185s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (6.3 studs)",
+        "Opponent attacks faster (0.185s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Taekwondo": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.54 studs vs 4 studs)",
+        "Opponent slower; play defensively and look for counter‑attack windows",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4 studs)",
+        "Slower attack delay (0.105s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Guard and wait for opponent to overextend before countering",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shorin-Ryu": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.54 studs vs 4.15 studs)",
+        "Faster fastest attack delay (0.105s vs 0.135s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.15 studs)",
+        "Opponent attacks faster (0.135s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Street Brawler": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.54 studs vs 4.5 studs)",
+        "Faster fastest attack delay (0.105s vs 0.14s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.5 studs)",
+        "Opponent attacks faster (0.14s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Shotokan": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.54 studs vs 4.5 studs)",
+        "Faster fastest attack delay (0.105s vs 0.1485s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.5 studs)",
+        "Opponent attacks faster (0.1485s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "After a successful block, strike immediately"
+      ]
+    },
+    "Tang Soo Do": {
+      "win_condition": "Maintain distance and kite",
+      "my_strengths": [
+        "Longer attack range (4.54 studs vs 4.45 studs)",
+        "Faster fastest attack delay (0.105s vs 0.13s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Shorter range (4.45 studs)",
+        "Opponent attacks faster (0.13s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Use long‑range moves (right_kick, left_kick) to keep distance",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss",
+        "Punish opponent when their guard breaks"
+      ]
+    },
+    "Chito-Ryu": {
+      "win_condition": "Apply pressure and interrupt",
+      "my_strengths": [
+        "Shorter range, can close gap faster",
+        "Faster fastest attack delay (0.105s vs 0.12s)",
+        "Opponent moves faster; rely on range or pressure to avoid chase"
+      ],
+      "their_weaknesses": [
+        "Longer range opponent (5 studs)",
+        "Opponent attacks faster (0.12s)",
+        "Slower mobility (14 studs/s)"
+      ],
+      "tactics": [
+        "Close quickly with fast punches and chase with kicks",
+        "Pressure opponent; interrupt with quick attacks",
+        "Feint to force opponent to chase and punish their miss"
+      ]
+    }
+  }
+}
