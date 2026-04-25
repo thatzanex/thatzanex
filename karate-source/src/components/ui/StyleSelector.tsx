@@ -77,8 +77,20 @@ export const StyleSelector: React.FC<StyleSelectorProps> = ({
                 </span>
                 {isSelected && <Check size={12} className={sideColor === 'red' ? 'text-red-500' : 'text-white'} />}
               </div>
+
+              {/* Style Image Preview */}
+              <div className="w-full h-12 mb-2 bg-neutral-950 overflow-hidden border border-neutral-800/30">
+                <img 
+                  src={`/karate/images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`} 
+                  alt={style.name}
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </div>
               
-              <span className={`text-xs font-black uppercase tracking-wider truncate w-full ${isSelected ? 'text-white' : 'text-neutral-500 group-hover:text-neutral-300'}`}>
+              <span className={`text-[10px] font-black uppercase tracking-wider truncate w-full ${isSelected ? 'text-white' : 'text-neutral-500 group-hover:text-neutral-300'}`}>
                 {style.name}
               </span>
 

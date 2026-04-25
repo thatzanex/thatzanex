@@ -65,32 +65,23 @@ const StylesOverviewView: React.FC<StylesOverviewViewProps> = ({ navigate }) => 
             <Card key={style.name} onClick={() => navigate('details', style.name)}>
               {/* Style thumbnail — shows image if available, placeholder otherwise */}
               <div className="h-36 mb-6 relative overflow-hidden bg-[#050505] border border-neutral-800/50 flex items-center justify-center">
-                {style.image ? (
-                  <img
-                    src={style.image}
-                    alt={style.name}
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                  />
-                ) : (
-                  <>
-                    {/* Subtle number watermark */}
-                    <span className="absolute -left-3 -bottom-3 text-neutral-800/70 font-mono text-7xl font-black select-none leading-none">
-                      0{i + 1}
-                    </span>
-                    {/* Grid pattern */}
-                    <div
-                      className="absolute inset-0 opacity-[0.04]"
-                      style={{
-                        backgroundImage:
-                          'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-                        backgroundSize: '24px 24px',
-                      }}
-                    />
-                    <span className="text-neutral-700 font-mono text-xs tracking-[0.4em] uppercase z-10">
-                      No Image
-                    </span>
-                  </>
-                )}
+                <img
+                  src={`/karate/images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`}
+                  alt={style.name}
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 scale-110 group-hover:scale-100"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).parentElement!.classList.add('bg-neutral-900');
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+                
+                {/* Fallback pattern (visible if image fails) */}
+                <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
+                  style={{
+                    backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+                    backgroundSize: '20px 20px',
+                  }}
+                />
               </div>
 
               <div className="flex justify-between items-start mb-4">

@@ -20,22 +20,7 @@ interface StyleDetailsViewProps {
   navigate: (view: string, name?: string) => void;
 }
 
-const BannerPlaceholder: React.FC<{ styleName: string }> = ({ styleName }) => (
-  <div className="h-72 bg-[#050505] flex items-center justify-center relative overflow-hidden">
-    <div className="absolute inset-0 opacity-[0.05]" style={{
-      backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-      backgroundSize: '30px 30px',
-    }} />
-    <div className="absolute inset-0 bg-gradient-to-br from-red-950/10 to-transparent" />
-    <div className="absolute bottom-4 right-6 text-8xl text-neutral-900/50 font-black select-none leading-none">流派</div>
-    <div className="relative z-10 text-center">
-      <p className="text-neutral-800 font-mono text-xs tracking-[0.5em] uppercase mb-2">No artwork configured</p>
-      <p className="text-neutral-900 font-mono text-[10px] tracking-widest uppercase">
-        Add <code className="text-red-900">imageBanner</code> to <code className="text-red-900">styleStats.json</code> → {styleName}
-      </p>
-    </div>
-  </div>
-);
+
 
 const StyleDetailsView: React.FC<StyleDetailsViewProps> = ({ styleName, navigate }) => {
   const style = styles.find((s) => s.name === styleName) ?? styles[0];
@@ -56,14 +41,28 @@ const StyleDetailsView: React.FC<StyleDetailsViewProps> = ({ styleName, navigate
 
       {/* Main Banner */}
       <div className="border border-neutral-800 bg-[#0a0a0a] overflow-hidden">
-        {style.imageBanner ? (
-          <div className="h-72 relative overflow-hidden">
-            <img src={style.imageBanner} alt={`${style.name} banner`} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+        <div className="h-72 relative overflow-hidden">
+          <img 
+            src={style.imageBanner || `/karate/images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`} 
+            alt={`${style.name} banner`} 
+            className="w-full h-full object-cover opacity-90"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none';
+              // If image fails, the BannerPlaceholder logic below handles it
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+          
+          {/* Fallback visual if no image loads */}
+          <div className="absolute inset-0 -z-10 bg-[#050505]">
+             <div className="absolute inset-0 opacity-[0.05]" style={{
+               backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+               backgroundSize: '30px 30px',
+             }} />
+             <div className="absolute inset-0 bg-gradient-to-br from-red-950/10 to-transparent" />
+             <div className="absolute bottom-4 right-6 text-8xl text-neutral-900/50 font-black select-none leading-none">流派</div>
           </div>
-        ) : (
-          <BannerPlaceholder styleName={style.name} />
-        )}
+        </div>
 
         <div className="p-8 md:p-12 border-t border-neutral-800">
           <div className="flex flex-wrap items-center gap-3 mb-4">
