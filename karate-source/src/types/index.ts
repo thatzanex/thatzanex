@@ -21,7 +21,7 @@ export interface StyleMoves {
 
 export interface StyleData {
   name: string;
-  /** Archetype label, e.g. "Counter-Offensive", "Offensive", "Defensive" */
+  /** Archetype label, e.g. "Counter", "Offensive", "Defensive" */
   type?: string;
   description: string;
   /** Optional path/URL to a square or portrait style icon shown on cards */

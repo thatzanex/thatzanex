@@ -13,7 +13,7 @@ import { STAT_LABELS, MOVE_LABELS, LOWER_IS_BETTER, formatStatValue } from '../t
 // Color coding per type for visual differentiation
 const TYPE_COLORS: Record<string, string> = {
   'Offensive':        'text-orange-400 border-orange-900/50 bg-orange-950/20',
-  'Counter-Offensive':'text-sky-400   border-sky-900/50   bg-sky-950/20',
+  'Counter':          'text-sky-400   border-sky-900/50   bg-sky-950/20',
   'Defensive':        'text-emerald-400 border-emerald-900/50 bg-emerald-950/20',
 };
 

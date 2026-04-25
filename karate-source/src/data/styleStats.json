@@ -1,8 +1,8 @@
 [
   {
     "name": "Kung Fu",
-    "type": "Counter-Offensive",
-    "description": "Master the elegance of Kung Fu, a counter-offensive style that seamlessly blends agility and precision, turning opponents' attacks against them with fluid, reactive strikes and swift counters.",
+    "type": "Counter",
+    "description": "Master the elegance of Kung Fu, a Counter style that seamlessly blends agility and precision, turning opponents' attacks against them with fluid, reactive strikes and swift counters.",
     "moves": {
       "punch": {
         "animation_speed_multiplier": 1.275,
@@ -119,7 +119,7 @@
   },
   {
     "name": "Wado-Ryu",
-    "type": "Counter-Offensive",
+    "type": "Counter",
     "description": "Master the art of calculated counter-attacks with Wado-Ryu, a style that harmonizes swift strikes with evasive maneuvers, inviting adversaries in to flawlessly redirect their force while swiftly countering their advances.",
     "moves": {
       "punch": {
@@ -159,8 +159,8 @@
   },
   {
     "name": "Taekwondo",
-    "type": "Counter-Offensive",
-    "description": "Elegant yet fierce, Taekwondo thrives in counter-offensive precision, utilizing swift kicks and agile maneuvers to flawlessly intercept and counteract opponents.",
+    "type": "Counter",
+    "description": "Elegant yet fierce, Taekwondo thrives in Counter precision, utilizing swift kicks and agile maneuvers to flawlessly intercept and counteract opponents.",
     "moves": {
       "punch": {
         "attack_range_studs": 3,
@@ -284,7 +284,7 @@
   },
   {
     "name": "Shotokan",
-    "type": "Counter-Offensive",
+    "type": "Counter",
     "description": "In the realm of calculated retaliation, Shotokan shines, combining precise strikes with swift counters, inviting adversaries in only to skillfully redirect their force.",
     "moves": {
       "punch": {
