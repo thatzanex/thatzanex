@@ -43,7 +43,7 @@ const StyleDetailsView: React.FC<StyleDetailsViewProps> = ({ styleName, navigate
       <div className="border border-neutral-800 bg-[#0a0a0a] overflow-hidden">
         <div className="h-72 relative overflow-hidden">
           <img 
-            src={style.imageBanner || `/karate/images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`} 
+            src={style.imageBanner || `${import.meta.env.BASE_URL}images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`} 
             alt={`${style.name} banner`} 
             className="w-full h-full object-cover opacity-90"
             onError={(e) => {

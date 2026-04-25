@@ -81,7 +81,7 @@ export const StyleSelector: React.FC<StyleSelectorProps> = ({
               {/* Style Image Preview */}
               <div className="w-full h-12 mb-2 bg-neutral-950 overflow-hidden border border-neutral-800/30">
                 <img 
-                  src={`/karate/images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`} 
+                  src={`${import.meta.env.BASE_URL}images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`} 
                   alt={style.name}
                   className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
                   onError={(e) => {

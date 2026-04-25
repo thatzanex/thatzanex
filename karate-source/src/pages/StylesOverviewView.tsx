@@ -66,7 +66,7 @@ const StylesOverviewView: React.FC<StylesOverviewViewProps> = ({ navigate }) => 
               {/* Style thumbnail — shows image if available, placeholder otherwise */}
               <div className="h-36 mb-6 relative overflow-hidden bg-[#050505] border border-neutral-800/50 flex items-center justify-center">
                 <img
-                  src={`/karate/images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`}
+                  src={`${import.meta.env.BASE_URL}images/styles/${style.name.toLowerCase().replace(/ /g, '_')}.png`}
                   alt={style.name}
                   className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 scale-110 group-hover:scale-100"
                   onError={(e) => {
