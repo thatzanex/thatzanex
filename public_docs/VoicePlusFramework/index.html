@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoicePlus — Docs</title>
+    <meta name="description" content="VoicePlus — enterprise-grade voice communication framework for Roblox, built on the new Audio API.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --accent-red: #dc2626;
+            --accent-glow: rgba(220, 38, 38, 0.15);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        .mesh-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(220, 38, 38, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 85% 40%, rgba(220, 38, 38, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 30% 90%, rgba(220, 38, 38, 0.05) 0%, transparent 40%);
+            filter: blur(100px);
+        }
+
+        .noise {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.035;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .glass-card {
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .shimmer {
+            mask-image: linear-gradient(-75deg, rgba(0,0,0,0.6) 30%, #000 50%, rgba(0,0,0,0.6) 70%);
+            mask-size: 200%;
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            from { mask-position: 150%; }
+            to { mask-position: -50%; }
+        }
+
+        ::selection { background: var(--accent-red); color: white; }
+
+        html { scroll-behavior: smooth; }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.35em;
+        }
+
+        .tag-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            padding: 0.3rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: rgba(255,255,255,0.6);
+            white-space: nowrap;
+        }
+        .tag-pill.primary {
+            border-color: rgba(220,38,38,0.4);
+            color: #f87171;
+            background: rgba(220,38,38,0.06);
+        }
+
+        /* ---------- docs-specific ---------- */
+
+        .doc-prose { color: #a3a3a3; font-size: 0.925rem; line-height: 1.75; }
+        .doc-prose strong { color: #e5e5e5; font-weight: 700; }
+        .doc-prose a { color: #f87171; text-decoration: none; border-bottom: 1px solid rgba(220,38,38,0.35); transition: color .2s, border-color .2s; }
+        .doc-prose a:hover { color: #fff; border-color: rgba(220,38,38,0.9); }
+
+        /* inline code */
+        code.inline, .doc-prose code:not(pre code), td code, th code, li code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8em;
+            color: #fca5a5;
+            background: rgba(220,38,38,0.07);
+            border: 1px solid rgba(220,38,38,0.15);
+            border-radius: 0.35rem;
+            padding: 0.1rem 0.4rem;
+            white-space: nowrap;
+        }
+
+        /* code blocks */
+        .code-block {
+            position: relative;
+            background: rgba(8,8,8,0.75);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .code-block .code-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.015);
+        }
+        .code-block pre {
+            margin: 0;
+            padding: 1.1rem 1.25rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: #d4d4d4;
+        }
+        .code-block pre code { white-space: pre; }
+        .tok-k { color: #f87171; }
+        .tok-s { color: #fda4af; }
+        .tok-c { color: #525252; font-style: italic; }
+        .tok-n { color: #fca5a5; }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #737373;
+            transition: color .2s;
+        }
+        .copy-btn:hover { color: #fff; }
+
+        /* ascii diagrams */
+        .diagram {
+            background: rgba(8,8,8,0.75);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            line-height: 1.65;
+            color: #a3a3a3;
+            white-space: pre;
+        }
+
+        /* tables */
+        .table-wrap { overflow-x: auto; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05); background: rgba(8,8,8,0.5); }
+        table.doc-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        table.doc-table th {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-align: left;
+            color: #f87171;
+            padding: 0.85rem 1.1rem;
+            border-bottom: 1px solid rgba(220,38,38,0.2);
+            background: rgba(220,38,38,0.04);
+            white-space: nowrap;
+        }
+        table.doc-table td {
+            padding: 0.8rem 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: #a3a3a3;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        table.doc-table tr:last-child td { border-bottom: none; }
+        table.doc-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+        /* callouts */
+        .callout {
+            border-left: 2px solid var(--accent-red);
+            background: rgba(220,38,38,0.05);
+            border-radius: 0 0.75rem 0.75rem 0;
+            padding: 1rem 1.25rem;
+        }
+
+        /* headings */
+        .doc-h2 { scroll-margin-top: 6rem; }
+        .doc-h3 { scroll-margin-top: 6rem; }
+        .anchor-link { opacity: 0; transition: opacity .2s; color: #dc2626; }
+        .doc-h2:hover .anchor-link, .doc-h3:hover .anchor-link { opacity: 1; }
+
+        /* sidebar */
+        .toc-link {
+            display: block;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.78rem;
+            color: #737373;
+            border-left: 1px solid rgba(255,255,255,0.07);
+            transition: color .2s, border-color .2s, background .2s;
+        }
+        .toc-link:hover { color: #e5e5e5; }
+        .toc-link.sub { padding-left: 1.9rem; font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; }
+        .toc-link.active {
+            color: #fff;
+            border-left-color: var(--accent-red);
+            background: linear-gradient(90deg, rgba(220,38,38,0.08), transparent);
+        }
+
+        /* scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="mesh-gradient"></div>
+    <div class="noise"></div>
+
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/30 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-neutral-300 hover:text-white transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4 text-red-600"></i>
+                thatzane
+            </a>
+            <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-neutral-500">
+                <span class="hidden sm:inline">docs</span>
+                <span class="hidden sm:inline text-red-600">/</span>
+                <span class="text-neutral-300">VoicePlus</span>
+                <span class="tag-pill primary hidden md:inline-flex">unlisted</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 pt-28 pb-24 flex gap-12">
+
+        <!-- Sidebar -->
+        <aside class="hidden lg:block w-60 shrink-0">
+            <div class="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
+                <p class="section-label text-red-500 uppercase mb-4">On this page</p>
+                <nav id="toc" class="pb-8">
+                    <a class="toc-link" href="#requirements">01 · Requirements</a>
+                    <a class="toc-link" href="#quick-start">02 · Quick Start</a>
+                    <a class="toc-link" href="#architecture">03 · Architecture</a>
+                    <a class="toc-link" href="#signal-chain">04 · Audio Signal Chain</a>
+                    <a class="toc-link" href="#instance-layout">05 · Instance Layout</a>
+                    <a class="toc-link" href="#api-reference">06 · API Reference</a>
+                    <a class="toc-link sub" href="#api-voiceplus">VoicePlus</a>
+                    <a class="toc-link sub" href="#api-nodemanager">NodeManager</a>
+                    <a class="toc-link sub" href="#api-effectmanager">EffectManager</a>
+                    <a class="toc-link sub" href="#api-radiomanager">RadioManager</a>
+                    <a class="toc-link sub" href="#api-groupmanager">GroupManager</a>
+                    <a class="toc-link sub" href="#api-errorhandler">ErrorHandler</a>
+                    <a class="toc-link sub" href="#api-types">Types</a>
+                    <a class="toc-link" href="#remotes">07 · Client Integration</a>
+                    <a class="toc-link" href="#presets">08 · Effect Presets</a>
+                    <a class="toc-link" href="#errors">09 · Error Philosophy</a>
+                    <a class="toc-link" href="#lifecycle">10 · Memory &amp; Lifecycle</a>
+                    <a class="toc-link" href="#extending">11 · Extending</a>
+                    <a class="toc-link" href="#troubleshooting">12 · Troubleshooting</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <main class="min-w-0 flex-1">
+
+            <!-- Hero -->
+            <header class="mb-16 reveal is-visible">
+                <p class="section-label text-red-500 uppercase mb-5 flex items-center gap-3">
+                    <i data-lucide="radio" class="w-4 h-4"></i>
+                    Voice Communication Framework
+                </p>
+                <h1 class="text-5xl sm:text-7xl font-black tracking-tighter mb-6 shimmer">VOICEPLUS</h1>
+                <p class="doc-prose max-w-2xl text-base">
+                    Enterprise-grade, strictly-typed voice communication framework for Roblox, built on the new
+                    <strong>Audio API</strong> (<code>AudioDeviceInput</code>, <code>Wire</code>, <code>AudioEmitter</code>, …).
+                    Designed for deep roleplay mechanics: proximity voice with real-time effects, push-to-talk radio
+                    frequencies, and always-on full-mesh group calls.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
+                    <div class="glass-card rounded-xl p-4 flex items-start gap-3">
+                        <i data-lucide="server" class="w-4 h-4 text-red-500 mt-1 shrink-0"></i>
+                        <div>
+                            <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 mb-1">Location (Studio)</p>
+                            <p class="text-sm text-neutral-300"><code>ServerScriptService.VoicePlus</code> <span class="text-neutral-500">(ModuleScript + 6 children)</span></p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 flex items-start gap-3">
+                        <i data-lucide="folder-git-2" class="w-4 h-4 text-red-500 mt-1 shrink-0"></i>
+                        <div>
+                            <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 mb-1">Location (local)</p>
+                            <p class="text-sm text-neutral-300"><code>playground/VoicePlus/</code> <span class="text-neutral-500">(<code>init.luau</code> layout, Rojo-compatible)</span></p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 flex items-start gap-3">
+                        <i data-lucide="braces" class="w-4 h-4 text-red-500 mt-1 shrink-0"></i>
+                        <div>
+                            <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 mb-1">Language</p>
+                            <p class="text-sm text-neutral-300">Luau, <code>--!strict</code> in every module</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 flex items-start gap-3">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-red-500 mt-1 shrink-0"></i>
+                        <div>
+                            <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 mb-1">Runs on</p>
+                            <p class="text-sm text-neutral-300">Server only <span class="text-neutral-500">(clients interact through two RemoteEvents)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Mobile TOC -->
+            <details class="lg:hidden glass-card rounded-xl mb-14 group">
+                <summary class="cursor-pointer list-none p-4 flex items-center justify-between">
+                    <span class="section-label text-red-500 uppercase">On this page</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-500 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <nav class="px-4 pb-4 grid grid-cols-1 sm:grid-cols-2 gap-x-6">
+                    <a class="toc-link" href="#requirements">01 · Requirements</a>
+                    <a class="toc-link" href="#quick-start">02 · Quick Start</a>
+                    <a class="toc-link" href="#architecture">03 · Architecture</a>
+                    <a class="toc-link" href="#signal-chain">04 · Audio Signal Chain</a>
+                    <a class="toc-link" href="#instance-layout">05 · Instance Layout</a>
+                    <a class="toc-link" href="#api-reference">06 · API Reference</a>
+                    <a class="toc-link" href="#remotes">07 · Client Integration</a>
+                    <a class="toc-link" href="#presets">08 · Effect Presets</a>
+                    <a class="toc-link" href="#errors">09 · Error Philosophy</a>
+                    <a class="toc-link" href="#lifecycle">10 · Memory &amp; Lifecycle</a>
+                    <a class="toc-link" href="#extending">11 · Extending</a>
+                    <a class="toc-link" href="#troubleshooting">12 · Troubleshooting</a>
+                </nav>
+            </details>
+
+            <!-- 01 Requirements -->
+            <section id="requirements" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">01</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Requirements <a href="#requirements" class="anchor-link text-xl align-middle">#</a></h2>
+                <div class="table-wrap mb-6">
+                    <table class="doc-table">
+                        <thead><tr><th>Requirement</th><th>Why</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><code>VoiceChatService.UseAudioApi = Enabled</code></td>
+                                <td>The entire framework is built on the new Audio API instance graph. <code>Start()</code> warns if this is off.</td>
+                            </tr>
+                            <tr>
+                                <td><code>VoiceChatService.EnableDefaultVoice = false</code></td>
+                                <td>VoicePlus creates its own emitters/listeners. Leaving default voice on doubles every voice. <code>Start()</code> warns if this is on.</td>
+                            </tr>
+                            <tr>
+                                <td>Voice chat enabled for the experience</td>
+                                <td>Set in Creator Hub → Experience → Communication settings.</td>
+                            </tr>
+                            <tr>
+                                <td>Voice-eligible, published testing</td>
+                                <td>Microphone audio does <strong>not</strong> flow in solo Studio playtests. Publish and test with voice-eligible accounts (or a voice-enabled Team Test).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout doc-prose">
+                    <p>Both VoiceChatService properties are already configured correctly in the current place.</p>
+                </div>
+            </section>
+
+            <!-- 02 Quick Start -->
+            <section id="quick-start" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">02</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Quick Start <a href="#quick-start" class="anchor-link text-xl align-middle">#</a></h2>
+                <p class="doc-prose mb-5">Server script (see <code>ServerScriptService.VoicePlusTest</code> for the full working sample):</p>
+
+                <div class="code-block mb-8">
+                    <div class="code-head">
+                        <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">server · luau</span>
+                        <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                    </div>
+                    <pre><code class="lua">local ServerScriptService = game:GetService("ServerScriptService")
+local VoicePlus = require(ServerScriptService.VoicePlus)
+
+-- Boot the framework: builds folders + remotes, hooks player lifecycle.
+VoicePlus.Start()
+
+-- Push-to-talk radio frequency.
+VoicePlus.CreateRadioChannel("Dispatch")
+
+game:GetService("Players").PlayerAdded:Connect(function(player)
+    VoicePlus.JoinRadioChannel(player, "Dispatch")
+    VoicePlus.ApplyPreset(player, "RadioStatic")
+end)</code></pre>
+                </div>
+
+                <p class="doc-prose mb-5">Client push-to-talk (e.g. bound to a key):</p>
+
+                <div class="code-block">
+                    <div class="code-head">
+                        <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">client · luau</span>
+                        <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                    </div>
+                    <pre><code class="lua">local remotes = game:GetService("ReplicatedStorage"):WaitForChild("VoicePlusRemotes")
+local transmitToggle = remotes:WaitForChild("VP_TransmitToggle")
+
+transmitToggle:FireServer("Dispatch", true)   -- key down: start transmitting
+transmitToggle:FireServer("Dispatch", false)  -- key up: stop</code></pre>
+                </div>
+            </section>
+
+            <!-- 03 Architecture -->
+            <section id="architecture" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">03</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Architecture <a href="#architecture" class="anchor-link text-xl align-middle">#</a></h2>
+                <p class="doc-prose mb-6">Seven modules, one directional dependency flow. Nothing depends &ldquo;upward&rdquo;, so there are no require cycles:</p>
+
+                <div class="diagram mb-8">init (VoicePlus)  ──────────────  entry point, remotes, lifecycle, unified API
+ ├── RadioManager ─┐
+ ├── GroupManager ─┼──► NodeManager ──► ErrorHandler
+ ├── EffectManager ┘        │                ▲
+ └── Types ◄────────────────┴────────────────┘   (all modules use Types + ErrorHandler)</div>
+
+                <div class="table-wrap mb-10">
+                    <table class="doc-table">
+                        <thead><tr><th>Module</th><th>Responsibility</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>init</code></td><td>Boots everything, owns folders/remotes/player lifecycle, exposes the flat public API.</td></tr>
+                            <tr><td><code>Types</code></td><td>All exported strict Luau types. No runtime logic.</td></tr>
+                            <tr><td><code>ErrorHandler</code></td><td>Tagged assertions, errors, warnings, and protected calls. The &ldquo;zero silent failures&rdquo; layer.</td></tr>
+                            <tr><td><code>NodeManager</code></td><td>Per-player audio profile (<code>VoiceNode</code>) and the rebuildable signal pipeline.</td></tr>
+                            <tr><td><code>EffectManager</code></td><td>Real-time voice effects (EQ, distortion, pitch, …) + roleplay presets.</td></tr>
+                            <tr><td><code>RadioManager</code></td><td>Push-to-talk channels: 1-to-many broadcasting with client sound cues.</td></tr>
+                            <tr><td><code>GroupManager</code></td><td>Always-on group calls: many-to-many full-mesh wiring.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="text-lg font-bold mb-4 flex items-center gap-2"><i data-lucide="git-branch" class="w-4 h-4 text-red-500"></i>Key design decision — the two taps</h3>
+                <p class="doc-prose mb-5">Every player node exposes exactly two connection points for other systems:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="glass-card rounded-xl p-5">
+                        <p class="font-mono text-xs text-red-400 mb-2 tracking-widest uppercase">Outbound tap</p>
+                        <p class="text-sm text-neutral-300 font-bold mb-2"><code>ProcessedMic</code></p>
+                        <p class="doc-prose text-sm">The player&rsquo;s voice <em>after</em> the effects chain. Radio and group calls source from here, so effects like <code>RadioStatic</code> are heard identically in proximity and over the air.</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-5">
+                        <p class="font-mono text-xs text-red-400 mb-2 tracking-widest uppercase">Inbound tap</p>
+                        <p class="text-sm text-neutral-300 font-bold mb-2"><code>InboundFader</code></p>
+                        <p class="doc-prose text-sm">The single mixing point for all direct (non-spatial) audio arriving at a player. Any number of wires can target it; the Audio API mixes them. Deafening is a single <code>Volume = 0</code> on this fader.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 04 Signal Chain -->
+            <section id="signal-chain" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">04</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">The Audio Signal Chain <a href="#signal-chain" class="anchor-link text-xl align-middle">#</a></h2>
+                <p class="doc-prose mb-6">Per player, built and owned by <code>NodeManager</code>:</p>
+
+                <div class="diagram mb-8">OUTBOUND (speaking)
+  Mic (AudioDeviceInput)
+    │ Wire "Chain_&lt;effectId&gt;" (one per effect, in EffectOrder)
+    ▼
+  [ FX_1 → FX_2 → … → FX_n ]        ← effect instances, e.g. AudioEqualizer
+    │ Wire "ChainToProcessed"
+    ▼
+  ProcessedMic (AudioFader)          ← THE outbound tap
+    │ Wire "ProcessedToEmitter"
+    ▼
+  VP_Emitter (AudioEmitter, on character Head)   → heard spatially by nearby players
+
+INBOUND — direct audio (radio / group calls)
+  &lt;other player's ProcessedMic&gt;
+    │ Wire "Radio_…" or "Call_…"
+    ▼
+  InboundFader (AudioFader)          ← THE inbound tap (mixes all direct sources)
+    │ Wire "InboundToOutput" (static)
+    ▼
+  DirectOutput (AudioDeviceOutput)   → plays flat on this player's device
+
+INBOUND — spatial audio (proximity hearing)
+  VP_Listener (AudioListener, on character Head)
+    │ Wire "ListenerToFader"
+    ▼
+  ListenerFader (AudioFader)
+    │ Wire "ListenerToOutput" (static)
+    ▼
+  ListenerOutput (AudioDeviceOutput) → plays world audio on this player's device</div>
+
+                <div class="callout doc-prose">
+                    <p><strong>Static vs. rebuildable wires.</strong> <code>InboundToOutput</code> and <code>ListenerToOutput</code> are created once and never touched. Everything else lives in <code>node.PipelineWires</code> and is destroyed + rerouted by <code>NodeManager._rebuildPipeline()</code> whenever the effect chain changes or the character respawns. Character-dependent segments (emitter/listener) are skipped with a warning when parts are missing — never a crash, never silence about it.</p>
+                </div>
+            </section>
+
+            <!-- 05 Instance Layout -->
+            <section id="instance-layout" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">05</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Instance Layout at Runtime <a href="#instance-layout" class="anchor-link text-xl align-middle">#</a></h2>
+                <p class="doc-prose mb-6">Created by <code>Start()</code> and <code>CreateNode()</code>:</p>
+
+                <div class="diagram mb-8">ReplicatedStorage
+├── VoicePlusRuntime (Folder)
+│   └── VP_&lt;UserId&gt; (Folder, one per registered player)
+│       ├── Mic              AudioDeviceInput   (.Player = player)
+│       ├── ProcessedMic     AudioFader
+│       ├── InboundFader     AudioFader
+│       ├── DirectOutput     AudioDeviceOutput  (.Player = player)
+│       ├── ListenerFader    AudioFader
+│       ├── ListenerOutput   AudioDeviceOutput  (.Player = player)
+│       ├── FX_&lt;effectId&gt;    (any active effect instances)
+│       └── (all Wires owned by this player, incl. radio/group wires they source)
+└── VoicePlusRemotes (Folder)
+    ├── VP_TransmitToggle    RemoteEvent  (client → server)
+    └── VP_NotifyClient      RemoteEvent  (server → client)
+
+&lt;player character&gt;.Head (or HumanoidRootPart / PrimaryPart fallback)
+├── VP_Emitter               AudioEmitter
+└── VP_Listener              AudioListener</div>
+
+                <div class="callout doc-prose">
+                    <p>Because every instance a player owns lives inside their <code>VP_&lt;UserId&gt;</code> container, teardown is one <code>Container:Destroy()</code> plus table cleanup — nothing can be orphaned.</p>
+                </div>
+            </section>
+
+            <!-- 06 API Reference -->
+            <section id="api-reference" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">06</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">API Reference <a href="#api-reference" class="anchor-link text-xl align-middle">#</a></h2>
+                <div class="callout doc-prose mb-12">
+                    <p>All functions <strong>throw a tagged <code>[VoicePlus ERROR]</code></strong> on invalid input (wrong types, unknown players/channels/calls, duplicates). Anything listed as returning a value returns it on success.</p>
+                </div>
+
+                <!-- 6.1 VoicePlus -->
+                <div id="api-voiceplus" class="doc-h3 mb-16">
+                    <h3 class="text-2xl font-black tracking-tight mb-2">6.1 · VoicePlus <span class="text-neutral-500 font-normal text-base">(root module)</span> <a href="#api-voiceplus" class="anchor-link text-lg align-middle">#</a></h3>
+                    <p class="font-mono text-xs text-neutral-500 mb-6"><code>require(ServerScriptService.VoicePlus)</code></p>
+
+                    <h4 class="text-sm font-bold uppercase tracking-[0.2em] text-red-400 mb-3 font-mono">Lifecycle</h4>
+                    <div class="table-wrap mb-5">
+                        <table class="doc-table">
+                            <thead><tr><th>Function</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>VoicePlus.Start(config: StartConfig?)</code></td><td>Boots the framework: creates <code>VoicePlusRuntime</code> + <code>VoicePlusRemotes</code>, initialises managers, validates VoiceChatService configuration, connects <code>PlayerAdded</code>/<code>PlayerRemoving</code>, registers players already in game. Throws if called twice.</td></tr>
+                                <tr><td><code>VoicePlus.IsStarted(): boolean</code></td><td>Whether <code>Start()</code> has run.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="code-block mb-5">
+                        <div class="code-head">
+                            <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">luau</span>
+                            <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                        </div>
+                        <pre><code class="lua">export type StartConfig = {
+    AutoRegisterPlayers: boolean?, -- default true
+}</code></pre>
+                    </div>
+
+                    <p class="doc-prose mb-10">With <code>AutoRegisterPlayers = false</code>, no <code>VoiceNode</code> is created on join — call <code>RegisterPlayer</code> yourself (cleanup on leave is always connected regardless).</p>
+
+                    <h4 class="text-sm font-bold uppercase tracking-[0.2em] text-red-400 mb-3 font-mono">Player registration</h4>
+                    <div class="table-wrap mb-10">
+                        <table class="doc-table">
+                            <thead><tr><th>Function</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>VoicePlus.RegisterPlayer(player): VoiceNode</code></td><td>Creates the player&rsquo;s audio profile. Throws if one already exists.</td></tr>
+                                <tr><td><code>VoicePlus.UnregisterPlayer(player)</code></td><td>Full cleanup across all managers (same routine as PlayerRemoving). Safe for unregistered players.</td></tr>
+                                <tr><td><code>VoicePlus.GetVoiceNode(player): VoiceNode</code></td><td>Returns the node; throws if the player isn&rsquo;t registered.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                        <div class="glass-card rounded-xl p-5">
+                            <p class="font-mono text-[10px] text-red-400 mb-2 tracking-widest uppercase">Effects</p>
+                            <p class="doc-prose text-sm"><code>AddVoiceEffect</code>, <code>RemoveVoiceEffect</code>, <code>ClearEffects</code>, <code>ApplyPreset</code>, <code>RemovePreset</code>, <code>GetPresetNames</code> — delegates to <a href="#api-effectmanager">EffectManager</a>.</p>
+                        </div>
+                        <div class="glass-card rounded-xl p-5">
+                            <p class="font-mono text-[10px] text-red-400 mb-2 tracking-widest uppercase">Radio</p>
+                            <p class="doc-prose text-sm"><code>CreateRadioChannel</code>, <code>DeleteRadioChannel</code>, <code>JoinRadioChannel</code>, <code>LeaveRadioChannel</code>, <code>SetTransmitting</code> — delegates to <a href="#api-radiomanager">RadioManager</a>.</p>
+                        </div>
+                        <div class="glass-card rounded-xl p-5">
+                            <p class="font-mono text-[10px] text-red-400 mb-2 tracking-widest uppercase">Group calls</p>
+                            <p class="doc-prose text-sm"><code>CreateGroupCall</code>, <code>EndGroupCall</code>, <code>AddToGroupCall</code>, <code>RemoveFromGroupCall</code> — delegates to <a href="#api-groupmanager">GroupManager</a>.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="text-sm font-bold uppercase tracking-[0.2em] text-red-400 mb-3 font-mono">Moderation <span class="normal-case tracking-normal text-neutral-500">(delegates to NodeManager)</span></h4>
+                    <div class="table-wrap mb-8">
+                        <table class="doc-table">
+                            <thead><tr><th>Function</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>VoicePlus.SetAdminMuted(player, muted: boolean)</code></td><td>Hard-mutes the player&rsquo;s <code>AudioDeviceInput</code>. They produce no audio anywhere and cannot key up a radio.</td></tr>
+                                <tr><td><code>VoicePlus.SetDeafened(player, deafened: boolean)</code></td><td>Zeroes the player&rsquo;s <code>InboundFader</code> and <code>ListenerFader</code> — they hear neither direct nor spatial audio.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout doc-prose">
+                        <p><strong>Sub-module access.</strong> For advanced use, the managers are exposed directly: <code>VoicePlus.NodeManager</code>, <code>.EffectManager</code>, <code>.RadioManager</code>, <code>.GroupManager</code>, <code>.ErrorHandler</code>, <code>.Types</code>.</p>
+                    </div>
+                </div>
+
+                <!-- 6.2 NodeManager -->
+                <div id="api-nodemanager" class="doc-h3 mb-16">
+                    <h3 class="text-2xl font-black tracking-tight mb-2">6.2 · NodeManager <a href="#api-nodemanager" class="anchor-link text-lg align-middle">#</a></h3>
+                    <p class="doc-prose mb-6">Owns <code>VoiceNode</code> creation, the signal pipeline, and moderation state.</p>
+                    <div class="table-wrap">
+                        <table class="doc-table">
+                            <thead><tr><th>Function</th><th>Returns</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>Init(runtimeFolder: Folder)</code></td><td>—</td><td>Called by <code>Start()</code>. Sets the parent folder for player containers.</td></tr>
+                                <tr><td><code>CreateNode(player)</code></td><td><code>VoiceNode</code></td><td>Builds the full hardware set (input, faders, outputs, static wires), hooks <code>CharacterAdded</code>/<code>CharacterRemoving</code> for emitter/listener attachment, and runs the first pipeline build. Throws on duplicates.</td></tr>
+                                <tr><td><code>CleanupPlayer(player)</code></td><td>—</td><td>Disconnects all connections, destroys character instances and the container, clears every nested table. Safe if never registered.</td></tr>
+                                <tr><td><code>FindNode(player)</code></td><td><code>VoiceNode?</code></td><td>Non-throwing lookup.</td></tr>
+                                <tr><td><code>GetNode(player)</code></td><td><code>VoiceNode</code></td><td>Throwing lookup — use when absence is a bug.</td></tr>
+                                <tr><td><code>GetProcessedMic(player)</code></td><td><code>AudioFader</code></td><td>The post-effects outbound tap. Source radio/group/custom wires from here.</td></tr>
+                                <tr><td><code>GetInboundFader(player)</code></td><td><code>AudioFader</code></td><td>The inbound mixing tap. Target direct-audio wires here.</td></tr>
+                                <tr><td><code>GetAllNodes()</code></td><td><code>{ [Player]: VoiceNode }</code></td><td>The live node registry (do not mutate).</td></tr>
+                                <tr><td><code>_rebuildPipeline(player)</code></td><td>—</td><td>Destroys all rebuildable wires and reroutes <code>Mic → effects → ProcessedMic → Emitter</code> plus <code>Listener → ListenerFader</code>. Called automatically by EffectManager and on character spawn; call manually only after hand-editing a node.</td></tr>
+                                <tr><td><code>SetAdminMuted(player, muted)</code></td><td>—</td><td>Sets <code>node.IsAdminMuted</code> and <code>Input.Muted</code>.</td></tr>
+                                <tr><td><code>SetDeafened(player, deafened)</code></td><td>—</td><td>Sets <code>node.IsDeafened</code> and zeroes/restores both inbound faders.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 6.3 EffectManager -->
+                <div id="api-effectmanager" class="doc-h3 mb-16">
+                    <h3 class="text-2xl font-black tracking-tight mb-2">6.3 · EffectManager <a href="#api-effectmanager" class="anchor-link text-lg align-middle">#</a></h3>
+                    <p class="doc-prose mb-6">Real-time voice modulation. All changes trigger an automatic pipeline rebuild.</p>
+                    <div class="table-wrap mb-8">
+                        <table class="doc-table">
+                            <thead><tr><th>Function</th><th>Returns</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>AddVoiceEffect(player, effectId: string, className: string, properties: {[string]: any})</code></td><td><code>Instance</code></td><td>Spawns the effect, applies every property (an invalid property name/value destroys the instance and throws — no half-applied effects), appends it to the chain. Effect order = insertion order.</td></tr>
+                                <tr><td><code>RemoveVoiceEffect(player, effectId)</code></td><td>—</td><td>Destroys the effect and heals the pipeline around the gap. Throws if the id isn&rsquo;t active.</td></tr>
+                                <tr><td><code>HasEffect(player, effectId)</code></td><td><code>boolean</code></td><td>Non-throwing existence check (false for unregistered players).</td></tr>
+                                <tr><td><code>ClearEffects(player)</code></td><td>—</td><td>Removes every active effect; restores a clean <code>Mic → ProcessedMic</code> chain.</td></tr>
+                                <tr><td><code>ApplyPreset(player, presetName)</code></td><td>—</td><td>Adds each of the preset&rsquo;s effects (skips ones already present, so it&rsquo;s idempotent).</td></tr>
+                                <tr><td><code>RemovePreset(player, presetName)</code></td><td>—</td><td>Removes exactly the preset&rsquo;s own effects (matched by namespaced ids), leaving manual effects untouched.</td></tr>
+                                <tr><td><code>GetPresetNames()</code></td><td><code>{ string }</code></td><td>Sorted list of preset names.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="doc-prose mb-4"><strong>Allowed effect classes</strong> (anything else throws before <code>Instance.new</code>):</p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="tag-pill">AudioEqualizer</span>
+                        <span class="tag-pill">AudioDistortion</span>
+                        <span class="tag-pill">AudioPitchShifter</span>
+                        <span class="tag-pill">AudioEcho</span>
+                        <span class="tag-pill">AudioReverb</span>
+                        <span class="tag-pill">AudioCompressor</span>
+                        <span class="tag-pill">AudioChorus</span>
+                        <span class="tag-pill">AudioFlanger</span>
+                        <span class="tag-pill">AudioFilter</span>
+                        <span class="tag-pill">AudioLimiter</span>
+                        <span class="tag-pill">AudioFader</span>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-head">
+                            <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">example · luau</span>
+                            <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                        </div>
+                        <pre><code class="lua">VoicePlus.AddVoiceEffect(player, "Helium", "AudioPitchShifter", { Pitch = 1.6 })
+task.delay(30, function()
+    VoicePlus.RemoveVoiceEffect(player, "Helium")
+end)</code></pre>
+                    </div>
+                </div>
+
+                <!-- 6.4 RadioManager -->
+                <div id="api-radiomanager" class="doc-h3 mb-16">
+                    <h3 class="text-2xl font-black tracking-tight mb-2">6.4 · RadioManager <a href="#api-radiomanager" class="anchor-link text-lg align-middle">#</a></h3>
+                    <p class="doc-prose mb-6">Push-to-talk frequencies: 1-to-many broadcasting, sourced from the transmitter&rsquo;s <code>ProcessedMic</code> (effects carry over the air).</p>
+                    <div class="table-wrap mb-8">
+                        <table class="doc-table">
+                            <thead><tr><th>Function</th><th>Returns</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>Init(notifyRemote: RemoteEvent)</code></td><td>—</td><td>Called by <code>Start()</code> with <code>VP_NotifyClient</code>.</td></tr>
+                                <tr><td><code>CreateChannel(name)</code></td><td><code>RadioChannel</code></td><td>Creates a frequency. Throws on duplicates.</td></tr>
+                                <tr><td><code>DeleteChannel(name)</code></td><td>—</td><td>Stops all live transmissions, detaches all listeners, removes the channel.</td></tr>
+                                <tr><td><code>GetChannel(name)</code></td><td><code>RadioChannel</code></td><td>Throwing lookup.</td></tr>
+                                <tr><td><code>ChannelExists(name)</code></td><td><code>boolean</code></td><td>Non-throwing check.</td></tr>
+                                <tr><td><code>JoinChannel(player, name)</code></td><td>—</td><td>Tunes the player in. If someone is mid-transmission, the new listener is patched in immediately. Requires a registered node.</td></tr>
+                                <tr><td><code>LeaveChannel(player, name)</code></td><td>—</td><td>Stops the player&rsquo;s own transmission, removes them as a listener, and severs every live wire pointed at them — without disturbing other listeners.</td></tr>
+                                <tr><td><code>SetTransmitting(player, name, enabled: boolean)</code></td><td>—</td><td>Key up / key down. Starting is idempotent, requires channel membership, and is refused (throws) for admin-muted players. Creates one wire per other listener; fires client cues (see <a href="#remotes">§7</a>).</td></tr>
+                                <tr><td><code>IsTransmitting(player, name)</code></td><td><code>boolean</code></td><td>Non-throwing check.</td></tr>
+                                <tr><td><code>CleanupPlayer(player)</code></td><td>—</td><td>Drops the player from every channel (protected — one bad channel can&rsquo;t block the rest). Called automatically on leave.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout doc-prose">
+                        <p><strong>Wiring model:</strong> while <code>P</code> transmits on a channel with listeners <code>A, B, C</code>, three wires exist — <code>P.ProcessedMic → A.InboundFader</code>, <code>→ B.InboundFader</code>, <code>→ C.InboundFader</code> — parented under <code>P</code>&rsquo;s container and destroyed on key-up.</p>
+                    </div>
+                </div>
+
+                <!-- 6.5 GroupManager -->
+                <div id="api-groupmanager" class="doc-h3 mb-16">
+                    <h3 class="text-2xl font-black tracking-tight mb-2">6.5 · GroupManager <a href="#api-groupmanager" class="anchor-link text-lg align-middle">#</a></h3>
+                    <p class="doc-prose mb-6">Always-on, full-mesh group calls (cell phones, dispatch lines). No push-to-talk — everyone hears everyone, always.</p>
+                    <div class="table-wrap mb-8">
+                        <table class="doc-table">
+                            <thead><tr><th>Function</th><th>Returns</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>CreateCall(callId)</code></td><td><code>GroupCall</code></td><td>Creates an empty call. Throws on duplicates.</td></tr>
+                                <tr><td><code>EndCall(callId)</code></td><td>—</td><td>Destroys every mesh wire and removes the call.</td></tr>
+                                <tr><td><code>GetCall(callId)</code></td><td><code>GroupCall</code></td><td>Throwing lookup.</td></tr>
+                                <tr><td><code>CallExists(callId)</code></td><td><code>boolean</code></td><td>Non-throwing check.</td></tr>
+                                <tr><td><code>GetParticipants(callId)</code></td><td><code>{ Player }</code></td><td>Snapshot array of current participants.</td></tr>
+                                <tr><td><code>AddParticipant(callId, player)</code></td><td>—</td><td>Wires the joiner bi-directionally to <strong>every</strong> existing participant. Requires a registered node.</td></tr>
+                                <tr><td><code>RemoveParticipant(callId, player)</code></td><td>—</td><td>Destroys only the wires involving this player; the rest of the mesh is untouched.</td></tr>
+                                <tr><td><code>CleanupPlayer(player)</code></td><td>—</td><td>Removes the player from every call they&rsquo;re in (protected). Called automatically on leave.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout doc-prose">
+                        <p><strong>Wiring model:</strong> a call with participants <code>{A, B, C}</code> holds 6 wires (each ordered pair). A 4th joiner adds exactly 6 more (3 out + 3 in); a leaver removes exactly their 2·(n−1).</p>
+                    </div>
+                </div>
+
+                <!-- 6.6 ErrorHandler -->
+                <div id="api-errorhandler" class="doc-h3 mb-16">
+                    <h3 class="text-2xl font-black tracking-tight mb-2">6.6 · ErrorHandler <a href="#api-errorhandler" class="anchor-link text-lg align-middle">#</a></h3>
+                    <p class="doc-prose mb-6">The &ldquo;zero silent failures&rdquo; utility used by every module. Also available to your own code via <code>VoicePlus.ErrorHandler</code>.</p>
+                    <div class="table-wrap">
+                        <table class="doc-table">
+                            <thead><tr><th>Function</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>throw(message: string, level: number?)</code></td><td>Raises <code>[VoicePlus ERROR] &lt;message&gt;</code>. <code>level</code> works like <code>error()</code>&rsquo;s relative to <em>your</em> code — the default (1) blames the caller of <code>throw</code>, so the wrapper never appears as the error source.</td></tr>
+                                <tr><td><code>assert(condition: any, message: string, level: number?): any</code></td><td>Tagged assert; returns the condition for inline use: <code>local node = ErrorHandler.assert(find(x), "missing")</code>.</td></tr>
+                                <tr><td><code>warn(message: string, includeTrace: boolean?)</code></td><td>Emits <code>[VoicePlus WARNING] &lt;message&gt;</code>, with a stack trace by default (<code>includeTrace = false</code> to suppress).</td></tr>
+                                <tr><td><code>protect(context: string, fn, ...): boolean</code></td><td>Runs <code>fn</code> under <code>pcall</code>. On failure, emits a tagged warning carrying the context string, the inner error, and a stack trace, then returns <code>false</code>. Used for best-effort work (cleanup, character attachment) that must not take the framework down but must never vanish quietly.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 6.7 Types -->
+                <div id="api-types" class="doc-h3">
+                    <h3 class="text-2xl font-black tracking-tight mb-2">6.7 · Types <a href="#api-types" class="anchor-link text-lg align-middle">#</a></h3>
+                    <p class="doc-prose mb-6">All types are exported from <code>VoicePlus.Types</code> (and the main ones re-exported from the root module).</p>
+                    <div class="code-block">
+                        <div class="code-head">
+                            <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">Types.luau</span>
+                            <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                        </div>
+                        <pre><code class="lua">export type EffectConfig = {
+    ClassName: string,
+    Properties: { [string]: any },
+}
+
+export type EffectEntry = {           -- a live effect in a pipeline
+    Id: string,
+    Instance: Instance,
+    Config: EffectConfig,
+}
+
+export type VoiceNode = {
+    Player: Player,
+    Container: Folder,
+    -- hardware
+    Input: AudioDeviceInput,
+    ProcessedMic: AudioFader,         -- outbound tap
+    InboundFader: AudioFader,         -- inbound tap
+    DirectOutput: AudioDeviceOutput,
+    ListenerFader: AudioFader,
+    ListenerOutput: AudioDeviceOutput,
+    Emitter: AudioEmitter?,           -- nil while character is absent
+    Listener: AudioListener?,
+    -- wiring &amp; effects
+    PipelineWires: { Wire },
+    Effects: { [string]: EffectEntry },
+    EffectOrder: { string },
+    -- state
+    IsAdminMuted: boolean,
+    IsDeafened: boolean,
+    ActiveChannels: { [string]: boolean },
+}
+
+export type RadioChannel = {
+    Name: string,
+    Listeners: { [Player]: boolean },
+    Transmitters: { [Player]: boolean },
+    TransmissionWires: { [Player]: { Wire } },   -- transmitter → wires
+}
+
+export type GroupCall = {
+    Id: string,
+    Participants: { [Player]: boolean },
+    MeshWires: { [Player]: { [Player]: Wire } }, -- speaker → listener → wire
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 07 Client Integration -->
+            <section id="remotes" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">07</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Client Integration (Remotes) <a href="#remotes" class="anchor-link text-xl align-middle">#</a></h2>
+                <p class="doc-prose mb-8">Both remotes live in <code>ReplicatedStorage.VoicePlusRemotes</code> after <code>Start()</code>.</p>
+
+                <h3 class="text-lg font-bold mb-3 flex items-center gap-2"><i data-lucide="arrow-up-from-line" class="w-4 h-4 text-red-500"></i><code class="inline">VP_TransmitToggle</code>&nbsp;— client → server</h3>
+                <div class="code-block mb-5">
+                    <div class="code-head">
+                        <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">signature</span>
+                        <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                    </div>
+                    <pre><code class="lua">transmitToggle:FireServer(channelName: string, enabled: boolean)</code></pre>
+                </div>
+                <p class="doc-prose mb-10">Server-side handling is fully validated: malformed argument types are rejected with a tagged warning, and rule violations (not in the channel, admin-muted) surface as protected warnings — a client can never crash the framework.</p>
+
+                <h3 class="text-lg font-bold mb-3 flex items-center gap-2"><i data-lucide="arrow-down-to-line" class="w-4 h-4 text-red-500"></i><code class="inline">VP_NotifyClient</code>&nbsp;— server → client</h3>
+                <div class="code-block mb-6">
+                    <div class="code-head">
+                        <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">signature</span>
+                        <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                    </div>
+                    <pre><code class="lua">notifyClient.OnClientEvent:Connect(function(event: string, channelName: string, transmitter: Player?)</code></pre>
+                </div>
+
+                <div class="table-wrap mb-8">
+                    <table class="doc-table">
+                        <thead><tr><th><code>event</code></th><th>Fired to</th><th>Meaning / typical UI reaction</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>"RadioMicClick"</code></td><td>The transmitter</td><td>Their own key-up confirmed — play a mic click.</td></tr>
+                            <tr><td><code>"RadioTransmissionStarted"</code></td><td>Every other listener</td><td>Someone keyed up — play the radio beep, show the speaker&rsquo;s name.</td></tr>
+                            <tr><td><code>"RadioTransmissionEnded"</code></td><td>Every other listener</td><td>Transmission over — play squelch tail.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="doc-prose mb-5">Example client cue handler:</p>
+                <div class="code-block">
+                    <div class="code-head">
+                        <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">client · luau</span>
+                        <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                    </div>
+                    <pre><code class="lua">local remotes = game:GetService("ReplicatedStorage"):WaitForChild("VoicePlusRemotes")
+remotes.VP_NotifyClient.OnClientEvent:Connect(function(event, channel, transmitter)
+    if event == "RadioTransmissionStarted" then
+        beepSound:Play()
+    elseif event == "RadioTransmissionEnded" then
+        squelchSound:Play()
+    elseif event == "RadioMicClick" then
+        clickSound:Play()
+    end
+end)</code></pre>
+                </div>
+            </section>
+
+            <!-- 08 Effect Presets -->
+            <section id="presets" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">08</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Effect Presets <a href="#presets" class="anchor-link text-xl align-middle">#</a></h2>
+                <p class="doc-prose mb-8">
+                    Applied with <code>VoicePlus.ApplyPreset(player, name)</code>, removed with <code>RemovePreset</code>.
+                    Each preset&rsquo;s effect ids are namespaced (<code>&lt;Preset&gt;_&lt;Role&gt;</code>), so <code>RemovePreset</code>
+                    surgically removes its own effects and never touches manually added ones. <code>ApplyPreset</code> skips
+                    ids that already exist, making it idempotent.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="glass-card rounded-xl p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i data-lucide="hard-hat" class="w-4 h-4 text-red-500"></i>
+                            <p class="font-mono text-xs text-white tracking-widest">MuffledHelmet</p>
+                        </div>
+                        <p class="doc-prose text-xs mb-3"><code>MuffledHelmet_EQ</code> — AudioEqualizer (Low +2, Mid −12, High −60)</p>
+                        <p class="text-sm text-neutral-400 leading-relaxed">Voice through a sealed helmet: highs killed, mids damped.</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i data-lucide="radio-tower" class="w-4 h-4 text-red-500"></i>
+                            <p class="font-mono text-xs text-white tracking-widest">RadioStatic</p>
+                        </div>
+                        <p class="doc-prose text-xs mb-3"><code>RadioStatic_EQ</code> — AudioEqualizer (Low −30, Mid +6, High −20) → <code>RadioStatic_Distortion</code> — AudioDistortion (0.35)</p>
+                        <p class="text-sm text-neutral-400 leading-relaxed">Crackly two-way radio: band-passed and gritted.</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i data-lucide="megaphone" class="w-4 h-4 text-red-500"></i>
+                            <p class="font-mono text-xs text-white tracking-widest">Megaphone</p>
+                        </div>
+                        <p class="doc-prose text-xs mb-3"><code>Megaphone_EQ</code> — AudioEqualizer (Low −24, Mid +10, High −6) → <code>Megaphone_Distortion</code> — AudioDistortion (0.15)</p>
+                        <p class="text-sm text-neutral-400 leading-relaxed">Honky, mid-forward PA blare with light clip.</p>
+                    </div>
+                </div>
+
+                <p class="doc-prose mb-5">To add a preset, extend the <code>PRESETS</code> table in <code>EffectManager.luau</code> — follow the id-namespacing convention so removal stays surgical.</p>
+
+                <div class="callout doc-prose">
+                    <p>Because presets sit <strong>before</strong> <code>ProcessedMic</code>, they color the voice everywhere: proximity, radio, and group calls alike.</p>
+                </div>
+            </section>
+
+            <!-- 09 Error Handling -->
+            <section id="errors" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">09</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Error Handling Philosophy <a href="#errors" class="anchor-link text-xl align-middle">#</a></h2>
+                <p class="doc-prose mb-8"><strong>Zero silent failures.</strong> Every failure path is either a thrown, tagged error or a tagged warning with a stack trace:</p>
+
+                <div class="space-y-4 mb-8">
+                    <div class="glass-card rounded-xl p-5 flex gap-4">
+                        <i data-lucide="octagon-x" class="w-5 h-5 text-red-500 shrink-0 mt-0.5"></i>
+                        <p class="doc-prose text-sm"><strong>Throw</strong> (<code>[VoicePlus ERROR]</code>) when the <em>caller</em> did something wrong: invalid types, unregistered players, unknown channels/calls/presets, duplicate creation, invalid effect properties, transmitting while admin-muted. These are programming/logic errors and should fail loudly during development.</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-5 flex gap-4">
+                        <i data-lucide="triangle-alert" class="w-5 h-5 text-red-500 shrink-0 mt-0.5"></i>
+                        <p class="doc-prose text-sm"><strong>Warn + continue</strong> (<code>[VoicePlus WARNING]</code>) when the <em>world</em> is imperfect but the framework can proceed: a character missing its Head, a partial pipeline rebuild, a malformed client remote, VoiceChatService misconfiguration, one channel failing during multi-channel cleanup.</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-5 flex gap-4">
+                        <i data-lucide="shield" class="w-5 h-5 text-red-500 shrink-0 mt-0.5"></i>
+                        <p class="doc-prose text-sm"><strong><code>ErrorHandler.protect</code></strong> wraps every best-effort region (player join/leave, character attach, per-channel cleanup) so one failure is reported with full context but never cascades — a broken channel can&rsquo;t block a player&rsquo;s other cleanups.</p>
+                    </div>
+                </div>
+
+                <div class="callout doc-prose">
+                    <p>Blame levels are propagated (<code>level</code> parameters) so errors point at <em>your</em> call site, not at the framework&rsquo;s internals.</p>
+                </div>
+            </section>
+
+            <!-- 10 Memory & Lifecycle -->
+            <section id="lifecycle" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">10</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Memory &amp; Lifecycle Guarantees <a href="#lifecycle" class="anchor-link text-xl align-middle">#</a></h2>
+                <p class="doc-prose mb-8">When <code>PlayerRemoving</code> fires (or you call <code>UnregisterPlayer</code>), the cleanup chain runs in order:</p>
+
+                <ol class="space-y-4 mb-10">
+                    <li class="glass-card rounded-xl p-5 flex gap-4">
+                        <span class="font-mono text-red-500 font-bold text-sm shrink-0 mt-0.5">01</span>
+                        <p class="doc-prose text-sm"><strong><code>RadioManager.CleanupPlayer</code></strong> — leaves every channel: destroys the player&rsquo;s transmission wires <em>and</em> every wire targeting them; other listeners keep receiving uninterrupted.</p>
+                    </li>
+                    <li class="glass-card rounded-xl p-5 flex gap-4">
+                        <span class="font-mono text-red-500 font-bold text-sm shrink-0 mt-0.5">02</span>
+                        <p class="doc-prose text-sm"><strong><code>GroupManager.CleanupPlayer</code></strong> — unlinks them from every call&rsquo;s mesh; wires between remaining participants are untouched.</p>
+                    </li>
+                    <li class="glass-card rounded-xl p-5 flex gap-4">
+                        <span class="font-mono text-red-500 font-bold text-sm shrink-0 mt-0.5">03</span>
+                        <p class="doc-prose text-sm"><strong><code>NodeManager.CleanupPlayer</code></strong> — disconnects <code>CharacterAdded</code>/<code>CharacterRemoving</code> connections, destroys <code>VP_Emitter</code>/<code>VP_Listener</code>, destroys the whole <code>VP_&lt;UserId&gt;</code> container (all faders, outputs, effects, and wires), and <code>table.clear</code>s every nested table before dropping the node reference.</p>
+                    </li>
+                </ol>
+
+                <h3 class="text-lg font-bold mb-4">Structural guarantees that make leaks impossible by construction</h3>
+                <ul class="doc-prose space-y-3 list-none">
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-red-500 shrink-0 mt-1.5"></i><span>Every instance a player owns lives in their container → one <code>Destroy()</code> collects everything, including wires created <em>by</em> radio/group systems (they&rsquo;re parented to the source player&rsquo;s container).</span></li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-red-500 shrink-0 mt-1.5"></i><span>Player-keyed dictionaries (<code>_nodes</code>, <code>Listeners</code>, <code>Participants</code>, <code>MeshWires</code>, …) are explicitly nil&rsquo;d, so <code>Player</code> objects are never retained after leave.</span></li>
+                    <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-red-500 shrink-0 mt-1.5"></i><span>Each cleanup step is <code>protect</code>-wrapped: a failure in one manager is reported but never prevents the others from running.</span></li>
+                </ul>
+            </section>
+
+            <!-- 11 Extending -->
+            <section id="extending" class="doc-h2 mb-20 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">11</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Extending the Framework <a href="#extending" class="anchor-link text-xl align-middle">#</a></h2>
+
+                <p class="doc-prose mb-5"><strong>Custom direct-audio systems</strong> (intercoms, phone-to-phone, spectator feeds): source from <code>NodeManager.GetProcessedMic(speaker)</code> and target <code>NodeManager.GetInboundFader(listener)</code> — you inherit effects, admin-mute, and deafen behavior for free:</p>
+
+                <div class="code-block mb-8">
+                    <div class="code-head">
+                        <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">custom wiring · luau</span>
+                        <button class="copy-btn" type="button"><i data-lucide="copy" class="w-3 h-3"></i><span>copy</span></button>
+                    </div>
+                    <pre><code class="lua">local wire = Instance.new("Wire")
+wire.SourceInstance = VoicePlus.NodeManager.GetProcessedMic(speaker)
+wire.TargetInstance = VoicePlus.NodeManager.GetInboundFader(listener)
+wire.Parent = VoicePlus.GetVoiceNode(speaker).Container  -- auto-cleaned on leave</code></pre>
+                </div>
+
+                <div class="space-y-5 doc-prose">
+                    <p><strong>World speakers</strong> (PA systems, radios on tables): wire a <code>ProcessedMic</code> into an <code>AudioEmitter</code> you place on a world part — everyone nearby hears the broadcast spatially.</p>
+                    <p><strong>New effect classes:</strong> add the class name to <code>VALID_EFFECT_CLASSES</code> in <code>EffectManager.luau</code> (keep the whitelist — it&rsquo;s what turns typos into loud errors instead of mystery silence).</p>
+                    <p><strong>Wire compatibility rules</strong> (enforced by construction in <code>createWire</code> call sites): sources are audio producers (<code>AudioDeviceInput</code>, effects, <code>AudioFader</code>, <code>AudioListener</code>); targets are audio consumers (effects, <code>AudioFader</code>, <code>AudioEmitter</code>, <code>AudioDeviceOutput</code>). Every wire in the framework sets <code>SourceInstance</code> and <code>TargetInstance</code> as a matched pair before parenting.</p>
+                </div>
+            </section>
+
+            <!-- 12 Troubleshooting -->
+            <section id="troubleshooting" class="doc-h2 mb-8 reveal">
+                <p class="section-label text-red-500 uppercase mb-3">12</p>
+                <h2 class="text-3xl font-black tracking-tight mb-6">Troubleshooting <a href="#troubleshooting" class="anchor-link text-xl align-middle">#</a></h2>
+                <div class="table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Symptom</th><th>Likely cause / fix</th></tr></thead>
+                        <tbody>
+                            <tr><td>Total silence in Studio playtest</td><td>Expected — mic audio doesn&rsquo;t flow in solo playtests. Publish and test with voice-eligible accounts.</td></tr>
+                            <tr><td><code>[VoicePlus WARNING] VoiceChatService.UseAudioApi is not Enabled</code></td><td>Set <code>VoiceChatService.UseAudioApi = Enabled</code> in Studio and republish.</td></tr>
+                            <tr><td>Everyone&rsquo;s voice is doubled</td><td><code>VoiceChatService.EnableDefaultVoice</code> is on — turn it off; VoicePlus owns the voice graph.</td></tr>
+                            <tr><td><code>[VoicePlus ERROR] No VoiceNode registered for X</code></td><td>You called an API before the player was registered. Either keep <code>AutoRegisterPlayers</code> on, or call <code>RegisterPlayer</code> first (mind the race on <code>PlayerAdded</code> — <code>Start()</code> must be called before your own <code>PlayerAdded</code> handlers connect).</td></tr>
+                            <tr><td>Player heard in proximity but not over radio</td><td>They aren&rsquo;t transmitting (<code>SetTransmitting</code> true requires prior <code>JoinChannel</code>), or they&rsquo;re admin-muted. Check <code>IsTransmitting</code>.</td></tr>
+                            <tr><td>No spatial voice for one player</td><td>Their character lacks Head/HumanoidRootPart/PrimaryPart at spawn — look for the <code>spatial voice deferred</code> warning; the emitter attaches on next respawn with valid parts.</td></tr>
+                            <tr><td>Effect add throws <code>Invalid property</code></td><td>Property name or value doesn&rsquo;t exist on that effect class — the message includes the class, effect id, and inner engine error.</td></tr>
+                            <tr><td>Radio cues never play on clients</td><td>You haven&rsquo;t connected <code>VP_NotifyClient.OnClientEvent</code> (see <a href="#remotes">§7</a>) — the server only fires events; sounds are the client&rsquo;s job.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="mt-20 pt-10 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 opacity-40">
+                <p class="text-xs font-mono uppercase tracking-widest">© 2026 THATZANE.DE</p>
+                <p class="text-xs font-mono text-neutral-500">Generated 2026-07-06 · deployed to <code class="inline">ServerScriptService.VoicePlus</code></p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Luau syntax highlighting
+        const LUA_TOKENS = /(--\[\[[\s\S]*?\]\]|--[^\n]*)|("(?:[^"\\]|\\.)*")|\b(local|function|end|if|then|else|elseif|for|in|do|while|repeat|until|return|break|true|false|nil|and|or|not|export|type|require|game|task)\b|(\b\d+(?:\.\d+)?\b)/g;
+        document.querySelectorAll('pre code.lua').forEach(el => {
+            const esc = el.textContent
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            el.innerHTML = esc.replace(LUA_TOKENS, (m, c, s, k, n) => {
+                if (c) return '<span class="tok-c">' + c + '</span>';
+                if (s) return '<span class="tok-s">' + s + '</span>';
+                if (k) return '<span class="tok-k">' + k + '</span>';
+                if (n) return '<span class="tok-n">' + n + '</span>';
+                return m;
+            });
+        });
+
+        // Copy buttons
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.closest('.code-block').querySelector('pre code');
+                navigator.clipboard.writeText(code.textContent).then(() => {
+                    const label = btn.querySelector('span');
+                    label.textContent = 'copied';
+                    btn.style.color = '#f87171';
+                    setTimeout(() => { label.textContent = 'copy'; btn.style.color = ''; }, 1500);
+                });
+            });
+        });
+
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); revealObserver.unobserve(e.target); } });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Scrollspy
+        const tocLinks = Array.from(document.querySelectorAll('#toc .toc-link'));
+        const targets = tocLinks
+            .map(l => document.getElementById(l.getAttribute('href').slice(1)))
+            .filter(Boolean);
+        const setActive = id => {
+            tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+        };
+        const spyObserver = new IntersectionObserver(entries => {
+            const visible = entries.filter(e => e.isIntersecting);
+            if (visible.length) {
+                setActive(visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0].target.id);
+            }
+        }, { rootMargin: '-15% 0px -70% 0px' });
+        targets.forEach(t => spyObserver.observe(t));
+    </script>
+</body>
+</html>
