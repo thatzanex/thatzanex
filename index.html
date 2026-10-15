@@ -3,189 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>thatzane</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --bg-color: #050505;
-            --accent-red: #dc2626;
-            --accent-glow: rgba(220, 38, 38, 0.15);
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-        .mesh-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(220, 38, 38, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(220, 38, 38, 0.03) 0%, transparent 40%);
-            filter: blur(100px);
-        }
-
-        .glass-card {
-            background: rgba(10, 10, 10, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            border-color: rgba(220, 38, 38, 0.3);
-            background: rgba(15, 15, 15, 0.6);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
-        }
-
-        .glow-button {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .glow-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
-            transition: 0.5s;
-        }
-
-        .glow-button:hover::before {
-            left: 100%;
-        }
-
-        .shimmer {
-            mask-image: linear-gradient(-75deg, rgba(0,0,0,0.6) 30%, #000 50%, rgba(0,0,0,0.6) 70%);
-            mask-size: 200%;
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            from { mask-position: 150%; }
-            to { mask-position: -50%; }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .floating { animation: float 6s ease-in-out infinite; }
-    </style>
+    <title>thatzane — Developer</title>
+    <meta name="description" content="thatzane — a scripting-first developer and co-founder of Atlantic Studios, currently rebuilding Bundeswehr Roleplay from scratch.">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:title" content="thatzane — Developer">
+    <meta property="og:description" content="Scripting first. Shipping always. Roblox games, backend systems, and the studio behind them.">
+    <meta property="og:url" content="https://thatzane.de/">
+    <link rel="canonical" href="https://thatzane.de/">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script>
+        // Decide motion before first paint so hidden "pre-animation" states never flash.
+        (function () {
+            var root = document.documentElement;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            root.classList.add('motion');
+            var seen = false;
+            try { seen = sessionStorage.getItem('tz-intro') === '1'; } catch (e) {}
+            if (!seen) root.classList.add('intro');
+            // Failsafe: if the animation module never loads, show everything.
+            setTimeout(function () {
+                if (!window.__tzReady) root.classList.remove('motion', 'intro');
+            }, 3000);
+        })();
+    </script>
+    <script type="module" src="/assets/js/main.js"></script>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-6 sm:p-12">
-    <div class="mesh-gradient"></div>
+<body>
+    <a class="skip" href="#now">Skip to content</a>
 
-    <!-- Header Section -->
-    <header class="text-center mb-16 relative">
-        <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-40 bg-red-600/10 blur-[100px] rounded-full"></div>
-        
-        <h1 class="text-6xl sm:text-8xl font-black tracking-tighter mb-4 shimmer">
-            THATZANE
-        </h1>
-        <p class="text-neutral-500 font-mono text-xs sm:text-sm tracking-[0.4em] uppercase">
-            Creative Development & Engineering
-        </p>
-    </header>
+    <!-- Intro (first visit per session) -->
+    <div class="intro-screen" aria-hidden="true">
+        <div class="intro-inner">
+            <span class="intro-word mono">THATZANE</span>
+            <span class="intro-count mono">000</span>
+        </div>
+    </div>
 
-    <!-- Main Grid -->
-    <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="progress" aria-hidden="true"><span></span></div>
 
-        <!-- Featured Card: Portfolio -->
-        <a href="/portfolio/" class="glass-card p-8 rounded-2xl group flex flex-col justify-between h-80 relative overflow-hidden md:col-span-2">
-            <!-- Background Decoration -->
-            <div class="absolute -right-16 -bottom-16 text-[16rem] text-white/5 font-black select-none pointer-events-none group-hover:text-red-600/5 transition-colors duration-500">
-                <i data-lucide="terminal-square" class="w-64 h-64"></i>
+    <!-- Nav -->
+    <nav class="nav" aria-label="Primary">
+        <div class="container nav-inner">
+            <a href="#top" class="wordmark">thatzane</a>
+            <ul class="nav-links mono">
+                <li><a href="#now"><span>01</span>Now</a></li>
+                <li><a href="#journey"><span>02</span>Journey</a></li>
+                <li><a href="#work"><span>03</span>Work</a></li>
+                <li><a href="#stack"><span>04</span>Stack</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta mono">Contact <span aria-hidden="true">→</span></a>
+        </div>
+    </nav>
+
+    <main id="top">
+        <!-- Hero -->
+        <header class="hero">
+            <div class="hero-grid" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                <div class="cross-layer">
+                <i class="cross" style="--x:0%;--y:22%"></i>
+                <i class="cross" style="--x:33.333%;--y:22%"></i>
+                <i class="cross" style="--x:66.666%;--y:22%"></i>
+                <i class="cross" style="--x:100%;--y:22%"></i>
+                <i class="cross" style="--x:16.666%;--y:78%"></i>
+                <i class="cross" style="--x:50%;--y:78%"></i>
+                <i class="cross" style="--x:83.333%;--y:78%"></i>
+                </div>
             </div>
 
-            <div class="relative z-10">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white">
-                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+            <div class="container hero-inner">
+                <dl class="hero-meta mono" data-hero-meta>
+                    <div><dt>Role</dt><dd data-scramble>Developer &amp; Co-founder</dd></div>
+                    <div><dt>Studio</dt><dd data-scramble>Atlantic Studios</dd></div>
+                    <div><dt>Focus</dt><dd data-scramble>Luau · Backend · Systems</dd></div>
+                    <div><dt>Currently</dt><dd><span class="dot" aria-hidden="true"></span>BWRP Revamp · Day <span data-day-count>—</span></dd></div>
+                </dl>
+
+                <h1 class="hero-title" data-hero-title>Scripting first.<br>Shipping <em>always.</em></h1>
+
+                <div class="hero-foot">
+                    <p class="hero-lede" data-hero-fade>
+                        I'm thatzane — a developer who lives mostly on the backend. Luau, Java, Python and Node are home,
+                        with enough front-end range to ship the interfaces around them.
+                    </p>
+                    <div class="hero-actions" data-hero-fade>
+                        <a href="#now" class="btn btn-primary" data-magnetic>See what I'm building <span aria-hidden="true">↓</span></a>
+                        <a href="mailto:thatonezane@gmail.com" class="btn btn-ghost" data-magnetic>Get in touch</a>
                     </div>
-                    <span class="text-xs font-bold text-red-500 tracking-[0.2em] uppercase">Featured</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 01 Now -->
+        <section id="now" class="section" aria-labelledby="now-title">
+            <div class="container">
+                <div class="section-head">
+                    <p class="label mono"><span>01</span> Now</p>
+                    <span class="bignum" aria-hidden="true" data-parallax>01</span>
                 </div>
 
-                <h2 class="text-4xl font-black mb-4 tracking-tight">Portfolio</h2>
-                <p class="text-neutral-400 max-w-md leading-relaxed text-sm">
-                    A closer look at what I build — Roblox games and systems, full-stack web apps, backend tooling, and the studio behind it all.
-                </p>
-            </div>
+                <div class="split">
+                    <aside class="split-aside" data-reveal>
+                        <p class="status mono"><span class="dot" aria-hidden="true"></span>In progress since 19.09.2026</p>
+                        <p class="aside-note">Flagship title of Atlantic Studios. A German Bundeswehr roleplay game on Roblox.</p>
+                    </aside>
 
-            <div class="relative z-10 flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-white/50 group-hover:text-white transition-colors">
-                Explore Portfolio <i data-lucide="arrow-up-right" class="w-4 h-4 text-red-600"></i>
-            </div>
-        </a>
+                    <div class="split-main">
+                        <h2 id="now-title" class="h2" data-split>Bundeswehr Roleplay, rebuilt from scratch.</h2>
+                        <p class="lede" data-reveal>
+                            Every script and every UI is being rewritten. The old game is kept only as a reference for how
+                            things behaved and as a source of assets — models, clothing, animations and sounds. The new
+                            version lives in a separate dev place and, once ready, is published over the main place so every
+                            player keeps their data.
+                        </p>
 
-        <!-- Secondary Card: Currently Building -->
-        <a href="/portfolio/#roblox-journey" class="glass-card p-8 rounded-2xl group flex flex-col justify-between h-64">
-            <div class="relative z-10">
-                <div class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-white mb-6 border border-white/10">
-                    <i data-lucide="gamepad-2" class="w-6 h-6"></i>
+                        <ol class="stats" data-reveal-group>
+                            <li data-reveal><span class="stat-num" data-count="27" data-day-count>27</span><span class="stat-label mono">Days into the revamp</span></li>
+                            <li data-reveal><span class="stat-num" data-count="9">9</span><span class="stat-label mono">System groups</span></li>
+                            <li data-reveal><span class="stat-num" data-count="0" data-count-from="100">0</span><span class="stat-label mono">Legacy scripts reused</span></li>
+                        </ol>
+
+                        <!-- Flow -->
+                        <div class="flow" data-reveal-group>
+                            <p class="mini-label mono" data-reveal>Release path</p>
+                            <ol class="flow-steps">
+                                <li data-reveal>
+                                    <span class="flow-key mono">OldGame/</span>
+                                    <span class="flow-val">Reference &amp; asset source only</span>
+                                </li>
+                                <li data-reveal>
+                                    <span class="flow-key mono">Dev place</span>
+                                    <span class="flow-val">New build, <code>src/</code> as source of truth</span>
+                                </li>
+                                <li data-reveal>
+                                    <span class="flow-key mono">Haupt Spiel</span>
+                                    <span class="flow-val">Published over, data preserved</span>
+                                </li>
+                            </ol>
+                            <p class="mini-label mono" data-reveal>Player data</p>
+                            <ol class="flow-steps flow-steps--two">
+                                <li data-reveal>
+                                    <span class="flow-key mono">PlayerData_v2</span>
+                                    <span class="flow-val">Read-only</span>
+                                </li>
+                                <li data-reveal>
+                                    <span class="flow-key mono">PlayerData_v3</span>
+                                    <span class="flow-val">Migrated on each player's first join</span>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <!-- Spec table -->
+                        <p class="mini-label mono" data-reveal>Tech stack &amp; decisions</p>
+                        <dl class="spec" data-reveal-group>
+                            <div data-reveal>
+                                <dt class="mono">Language</dt>
+                                <dd>Luau for all code. <code>src/</code> is the source of truth — Studio is only used to deploy and test.</dd>
+                            </div>
+                            <div data-reveal>
+                                <dt class="mono">Interface</dt>
+                                <dd>React-Luau (react-lua, the newer form of Roact) for the HUD, vendored and loaded through a single entry module.</dd>
+                            </div>
+                            <div data-reveal>
+                                <dt class="mono">State &amp; motion</dt>
+                                <dd>Charm for UI state and Ripple for spring animations, wrapped in our own <code>useAtom</code> and <code>useSpring</code> hooks.</dd>
+                            </div>
+                            <div data-reveal>
+                                <dt class="mono">Deploy</dt>
+                                <dd>No Rojo, no Wally. Deploys run through Studio MCP and a small local HTTP server.</dd>
+                            </div>
+                            <div data-reveal>
+                                <dt class="mono">Combat</dt>
+                                <dd>Our own server-authoritative combat system. A-Chassis stays for vehicle physics.</dd>
+                            </div>
+                            <div data-reveal>
+                                <dt class="mono">Architecture</dt>
+                                <dd>Systems sorted into nine groups — Core, Economy, Arsenal and more. Each exposes a <code>ClientAPI</code> or <code>ServerAPI</code>, and every file opens with a doc header.</dd>
+                            </div>
+                            <div data-reveal>
+                                <dt class="mono">Tooling</dt>
+                                <dd>Python checks for folder layout and tests, plus <code>luau-compile</code> for syntax.</dd>
+                            </div>
+                            <div data-reveal>
+                                <dt class="mono">Game design</dt>
+                                <dd>R6 rig. German first, with every string going through <code>LocaleAPI</code>. UI style picked through mockup rounds.</dd>
+                            </div>
+                        </dl>
+
+                        <p class="note mono" data-reveal><span class="dot" aria-hidden="true"></span>Most core systems are built — the rest is tracked on the checklist.</p>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-bold mb-2">Currently Building</h3>
-                <p class="text-neutral-500 text-sm">Jugendtreff Hangout — a new Roblox game I kicked off in June 2026. Follow the journey.</p>
             </div>
-            <div class="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-neutral-600 group-hover:text-white transition-colors">
-                Read More <i data-lucide="chevron-right" class="w-3 h-3 text-red-600"></i>
-            </div>
-        </a>
+        </section>
 
-        <!-- Secondary Card: Contact -->
-        <a href="mailto:thatonezane@gmail.com" class="glass-card p-8 rounded-2xl group flex flex-col justify-between h-64">
-            <div class="relative z-10">
-                <div class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-white mb-6 border border-white/10">
-                    <i data-lucide="mail" class="w-6 h-6"></i>
+        <!-- 02 Journey -->
+        <section id="journey" class="section" aria-labelledby="journey-title">
+            <div class="container">
+                <div class="section-head">
+                    <p class="label mono"><span>02</span> Journey</p>
+                    <span class="bignum" aria-hidden="true" data-parallax>02</span>
                 </div>
-                <h3 class="text-2xl font-bold mb-2">Get In Touch</h3>
-                <p class="text-neutral-500 text-sm">Have a project in mind or just want to say hi? Send me an email.</p>
-            </div>
-            <div class="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-neutral-600 group-hover:text-white transition-colors">
-                thatonezane@gmail.com <i data-lucide="chevron-right" class="w-3 h-3 text-red-600"></i>
-            </div>
-        </a>
+                <div class="split">
+                    <aside class="split-aside" data-reveal>
+                        <p class="aside-note">From a two-person idea to a running studio.</p>
+                    </aside>
+                    <div class="split-main">
+                        <h2 id="journey-title" class="h2" data-split>Two years, two games, one rebuild.</h2>
 
+                        <div class="timeline-wrap" data-timeline>
+                        <span class="timeline-track" aria-hidden="true"><span class="timeline-fill"></span></span>
+                        <ol class="timeline">
+                            <li data-reveal>
+                                <time class="mono" datetime="2024-05-18">18.05.2024</time>
+                                <h3>Founded Atlantic Studios</h3>
+                                <p>Co-founded a small Roblox development studio with two others. What started as a side project became the foundation for everything I've shipped since.</p>
+                            </li>
+                            <li data-reveal>
+                                <time class="mono">Flagship</time>
+                                <h3>Bundeswehr Roleplay</h3>
+                                <p>The project I've put the most hours into by far. Beyond in-game scripting, I built the ecosystem around it: the bwrp.net website and staff dashboard, Discord shift-logging automation, a dynamic weather system and a custom texture pack.</p>
+                            </li>
+                            <li data-reveal>
+                                <time class="mono" datetime="2026-06-25">25.06.2026</time>
+                                <h3>Started Jugendtreff Hangout</h3>
+                                <p>A different tone from BWRP — a relaxed hangout experience, built from the ground up.</p>
+                            </li>
+                            <li data-reveal>
+                                <time class="mono" datetime="2026-09-18">18.09.2026</time>
+                                <h3>Jugendtreff shipped</h3>
+                                <p>Completed and published. Because of low player counts, further development is on ice for now.</p>
+                            </li>
+                            <li class="is-now" data-reveal>
+                                <time class="mono" datetime="2026-09-19">19.09.2026 · Now</time>
+                                <h3>The BWRP revamp begins</h3>
+                                <p>A full rewrite of the flagship title — new architecture, new UI, existing player data carried over.</p>
+                            </li>
+                        </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 Work -->
+        <section id="work" class="section" aria-labelledby="work-title">
+            <div class="container">
+                <div class="section-head">
+                    <p class="label mono"><span>03</span> Work</p>
+                    <span class="bignum" aria-hidden="true" data-parallax>03</span>
+                </div>
+                <h2 id="work-title" class="h2 h2--wide" data-split>Selected work.</h2>
+
+                <ul class="work" data-reveal-group>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">01</span>
+                        <div class="work-body">
+                            <h3>Bundeswehr Roleplay</h3>
+                            <p>Flagship Roblox roleplay game. Currently being rebuilt from scratch with React-Luau, Charm and a server-authoritative combat system.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>Luau</li><li>React-Luau</li></ul>
+                        <span class="work-meta mono"><span class="dot" aria-hidden="true"></span>Revamp</span>
+                    </li>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">02</span>
+                        <div class="work-body">
+                            <h3>Jugendtreff Hangout</h3>
+                            <p>A relaxed Roblox hangout game, built from June to September 2026. Shipped and published; development paused due to low player counts.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>Luau</li><li>Roblox</li></ul>
+                        <span class="work-meta mono">Shipped · On ice</span>
+                    </li>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">03</span>
+                        <div class="work-body">
+                            <h3>bwrp.net</h3>
+                            <p>Production website for Bundeswehr Roleplay — static frontend on a Cloudflare Worker API, staff dashboard, Discord webhooks and Roblox group-role integration with region-based login security.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>Workers</li><li>Security</li></ul>
+                        <span class="work-meta mono">Web</span>
+                    </li>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">04</span>
+                        <div class="work-body">
+                            <h3>swrp.me</h3>
+                            <p>Website for a Star Wars roleplay community. React 19 and Vite with react-three-fiber for in-browser 3D, backed by a Node/Express layer with Roblox API integration.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>React</li><li>Three.js</li></ul>
+                        <span class="work-meta mono">Web</span>
+                    </li>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">05</span>
+                        <div class="work-body">
+                            <h3>Saber System Revamp</h3>
+                            <p>Client-server lightsaber combat for Roblox — ignition, blocking, dashing, flipping and dual-wielding over remote events, plus an in-house debug command bar.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>Luau</li><li>Gameplay</li></ul>
+                        <span class="work-meta mono">Roblox</span>
+                    </li>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">06</span>
+                        <div class="work-body">
+                            <h3>Military Ranks Plugin</h3>
+                            <p>A PaperMC plugin with a full military rank ladder — promotions, death penalties and custom GUI menus, integrated with LuckPerms.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>Java</li></ul>
+                        <span class="work-meta mono">Minecraft</span>
+                    </li>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">07</span>
+                        <div class="work-body">
+                            <h3>Praxis Dr. Tunca Karakas</h3>
+                            <p>Freelance site for a medical practice. Next.js and TypeScript with Supabase, shadcn/Radix components and full i18n.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>Next.js</li><li>Supabase</li></ul>
+                        <span class="work-meta mono">Client</span>
+                    </li>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">08</span>
+                        <div class="work-body">
+                            <h3>Mermaid Live Editor</h3>
+                            <p>Contributed a redesigned multi-root file explorer with persistence and renaming, alongside pan/zoom and theming fixes.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>Svelte</li></ul>
+                        <span class="work-meta mono">Open source</span>
+                    </li>
+                    <li class="work-row" data-reveal>
+                        <span class="work-idx mono">09</span>
+                        <div class="work-body">
+                            <h3>Username Generator</h3>
+                            <p>A Python tool that generates large batches of realistic Roblox-style usernames, with leetspeak variants and de-duplication.</p>
+                        </div>
+                        <ul class="work-tags mono"><li>Python</li></ul>
+                        <span class="work-meta mono">Tooling</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 04 Stack -->
+        <section id="stack" class="section" aria-labelledby="stack-title">
+            <div class="container">
+                <div class="section-head">
+                    <p class="label mono"><span>04</span> Stack</p>
+                    <span class="bignum" aria-hidden="true" data-parallax>04</span>
+                </div>
+                <h2 id="stack-title" class="h2 h2--wide" data-split>Scripting is home. UI is a skill I keep sharp.</h2>
+
+                <div class="stack" data-reveal-group>
+                    <div class="stack-col" data-reveal>
+                        <p class="mini-label mono">Scripting &amp; backend</p>
+                        <ul class="stack-list">
+                            <li>Luau</li><li>Java</li><li>Python</li><li>Node.js / Express</li>
+                            <li>TypeScript</li><li>Cloudflare Workers</li><li>REST APIs</li>
+                        </ul>
+                    </div>
+                    <div class="stack-col" data-reveal>
+                        <p class="mini-label mono">UI &amp; frontend</p>
+                        <ul class="stack-list">
+                            <li>React-Luau</li><li>React</li><li>Next.js</li><li>Svelte</li>
+                            <li>Tailwind CSS</li><li>Three.js / R3F</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 Contact -->
+        <section id="contact" class="section contact" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="section-head">
+                    <p class="label mono"><span>05</span> Contact</p>
+                </div>
+                <h2 id="contact-title" class="contact-title" data-split>Got something to build?</h2>
+                <div class="contact-links" data-reveal>
+                    <a href="mailto:thatonezane@gmail.com" class="contact-mail" data-magnetic>
+                        thatonezane@gmail.com <span aria-hidden="true">↗</span>
+                    </a>
+                    <a href="https://github.com/thatzanex" target="_blank" rel="noopener" class="btn btn-ghost" data-magnetic>
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .31.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+                        github.com/thatzanex
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-20 pt-10 border-t border-white/5 w-full max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-6 opacity-30">
-        <p class="text-xs font-mono uppercase tracking-widest">
-            © 2026 THATZANE.DE
-        </p>
-        <div class="flex items-center gap-6">
-            <a href="https://github.com/thatzanex" target="_blank" class="hover:text-white transition-colors" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .31.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            </a>
-            <a href="mailto:thatonezane@gmail.com" class="hover:text-white transition-colors"><i data-lucide="mail" class="w-4 h-4"></i></a>
+    <footer class="footer">
+        <div class="container footer-inner mono">
+            <span>© 2026 thatzane.de</span>
+            <a href="#top">Back to top ↑</a>
         </div>
     </footer>
-
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
 </body>
 </html>
