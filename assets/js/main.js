@@ -12,6 +12,7 @@ import {
     onScroll,
     splitText,
     scrambleText,
+    spring,
     utils,
 } from '../vendor/anime.esm.min.js';
 
@@ -76,6 +77,12 @@ function trackScroll() {
 trackActiveSection();
 trackScroll();
 
+$('[data-replay]')?.addEventListener('click', () => {
+    try { sessionStorage.removeItem('tz-intro'); } catch (e) { /* storage blocked */ }
+    window.scrollTo(0, 0);
+    location.reload();
+});
+
 /* ------------------------------------------------------------------ */
 /* Motion                                                             */
 /* ------------------------------------------------------------------ */
@@ -88,9 +95,8 @@ if (root.classList.contains('motion')) {
 }
 
 function start() {
-    const playIntro = root.classList.contains('intro');
-    const heroDelay = playIntro ? introSequence() : 0;
-    heroSequence(heroDelay);
+    const intro = root.classList.contains('intro') ? runIntro() : Promise.resolve();
+    intro.then(heroSequence);
     sectionHeadings();
     reveals();
     counters();
@@ -99,42 +105,122 @@ function start() {
     magnetic();
 }
 
-/** Full-screen counter on first visit of the session, then wipe away. Returns ms until done. */
-function introSequence() {
-    const screen = $('.intro-screen');
-    const count = $('.intro-count');
-    const word = $('.intro-word');
-    const counter = { v: 0 };
-
-    try { sessionStorage.setItem('tz-intro', '1'); } catch (e) { /* storage blocked */ }
-
-    createTimeline()
-        .add(word, { innerHTML: scrambleText({ chars: 'uppercase', duration: 700 }) }, 0)
-        .add(counter, {
-            v: 100,
-            duration: 1000,
-            ease: 'inOut(3)',
-            modifier: utils.round(0),
-            onUpdate: () => { count.textContent = String(Math.round(counter.v)).padStart(3, '0'); },
-        }, 0)
-        .add(screen, {
-            clipPath: ['inset(0% 0% 0% 0%)', 'inset(0% 0% 100% 0%)'],
-            duration: 750,
-            ease: 'inOut(4)',
-            onComplete: () => root.classList.remove('intro'),
-        }, 1100);
-
-    return 1350;
+/** Wraps every character of `el`'s text in its own span so it can be "typed". */
+function wrapChars(el) {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) {
+        // Newlines between the line spans are layout-only whitespace.
+        if (walker.currentNode.parentNode !== el) nodes.push(walker.currentNode);
+    }
+    const chars = [];
+    nodes.forEach((node) => {
+        const frag = document.createDocumentFragment();
+        [...node.textContent].forEach((ch) => {
+            const span = document.createElement('span');
+            span.textContent = ch;
+            span.style.visibility = 'hidden';
+            frag.append(span);
+            chars.push(span);
+        });
+        node.replaceWith(frag);
+    });
+    return chars;
 }
 
-function heroSequence(delay) {
+/**
+ * First visit of the session: a Studio session writes the site's bootstrap module,
+ * runs it, and the server "builds" thatzane out of bricks on a baseplate.
+ * Resolves when the site should start its own entrance.
+ */
+function runIntro() {
+    return new Promise((resolve) => {
+        const screen = $('.intro-screen');
+        const studio = $('.studio');
+        const scene = $('.scene');
+        const plate = $('.plate');
+        const run = $('.studio-run');
+        const outLines = $$('.out-line');
+        const bricks = $$('.scene-bricks .brick');
+        const chars = wrapChars($('[data-code]'));
+        const caret = document.createElement('span');
+        caret.className = 'caret';
+        $('[data-code] .ln').append(caret);
+
+        try { sessionStorage.setItem('tz-intro', '1'); } catch (e) { /* storage blocked */ }
+
+        utils.set(studio, { opacity: 0 });
+        utils.set(outLines, { opacity: 0 });
+        utils.set(bricks, { y: '-110vh' });
+
+        let finished = false;
+        const finish = (fast = false) => {
+            if (finished) return;
+            finished = true;
+            tl.pause();
+            // Push the camera into the built word, then reveal the site underneath.
+            animate(scene, { scale: [1, 1.35], duration: fast ? 500 : 1100, ease: 'inOut(3)' });
+            animate(screen, {
+                opacity: [1, 0],
+                duration: fast ? 400 : 700,
+                delay: fast ? 0 : 400,
+                ease: 'out(2)',
+                onBegin: () => setTimeout(resolve, fast ? 0 : 150),
+                onComplete: () => root.classList.remove('intro'),
+            });
+        };
+
+        const typing = { i: 0 };
+        let shown = 0;
+
+        const tl = createTimeline({ defaults: { ease: 'out(3)' } })
+            .add(studio, { opacity: [0, 1], scale: [0.96, 1], y: [18, 0], duration: 700 }, 100)
+            .add(typing, {
+                i: chars.length,
+                duration: chars.length * 22,
+                ease: 'linear',
+                onUpdate: () => {
+                    const n = Math.floor(typing.i);
+                    while (shown < n) chars[shown++].style.visibility = 'visible';
+                    if (shown) chars[shown - 1].after(caret);
+                },
+            }, 650)
+            .call(() => { caret.remove(); run.classList.add('is-pressed'); }, '+=350')
+            .add(run, { scale: [1, 0.9, 1], duration: 260 }, '<<')
+            .add(outLines, { opacity: [0, 1], x: [-6, 0], duration: 220, delay: stagger(300) }, '+=150')
+            .add(studio, { opacity: 0, scale: 0.94, y: -24, duration: 550, ease: 'in(2)' }, '+=500')
+            .set(scene, { visibility: 'visible' }, '<<')
+            .add(scene, { opacity: [0, 1], duration: 600 }, '<<')
+            .add(plate, { rotateX: [80, 64], duration: 1600 }, '<<')
+            .add(bricks, {
+                y: ['-110vh', '0vh'],
+                ease: spring({ bounce: 0.22, duration: 650 }),
+                delay: stagger(85),
+            }, '<<+=300')
+            .call(() => finish(), '+=450');
+
+        const skip = $('.intro-skip');
+        skip.addEventListener('click', () => finish(true));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') finish(true); }, { once: true });
+    });
+}
+
+function heroSequence() {
     const title = $('[data-hero-title]');
     const { chars } = splitText(title, { chars: true });
     title.style.visibility = 'visible';
 
-    const tl = createTimeline({ delay, defaults: { ease: EASE_OUT } });
+    const tl = createTimeline({ defaults: { ease: EASE_OUT } });
 
-    tl.add('.hero-grid > span', {
+    // The baseplate lands first: it is where the intro's bricks "end up".
+    tl.add('.baseplate', { opacity: [0, 1], scale: [0.96, 1], duration: 600 }, 0)
+    .add('.baseplate .brick', {
+        y: ['-1.2em', '0em'],
+        opacity: [0, 1],
+        ease: spring({ bounce: 0.25, duration: 550 }),
+        delay: stagger(55),
+    }, 120)
+    .add('.hero-grid > span', {
         scaleY: [0, 1],
         duration: 1400,
         ease: 'inOut(3)',

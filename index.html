@@ -46,11 +46,58 @@
 <body>
     <a class="skip" href="#now">Skip to content</a>
 
-    <!-- Intro (first visit per session) -->
-    <div class="intro-screen" aria-hidden="true">
-        <div class="intro-inner">
-            <span class="intro-word mono">THATZANE</span>
-            <span class="intro-count mono">000</span>
+    <!-- Intro (first visit per session): a Studio session that builds the site -->
+    <div class="intro-screen">
+        <button type="button" class="intro-skip">Skip intro</button>
+
+        <div class="studio" aria-hidden="true">
+            <div class="studio-bar">
+                <span class="studio-title">thatzane.rbxl</span>
+                <span class="studio-run"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 1.2v9.6L10.4 6z" fill="currentColor"/></svg>Run</span>
+            </div>
+            <div class="studio-body">
+                <aside class="explorer">
+                    <p class="panel-head">Explorer</p>
+                    <ul class="tree">
+                        <li><i class="ico ico-workspace"></i>Workspace</li>
+                        <li><i class="ico ico-players"></i>Players</li>
+                        <li><i class="ico ico-folder"></i>ReplicatedStorage</li>
+                        <li class="is-open"><i class="ico ico-sss"></i>ServerScriptService</li>
+                        <li class="tree-child is-selected">
+                            <svg class="ico-module" viewBox="0 0 16 16" width="16" height="16">
+                                <path d="M3.5 1.5h6l3 3v10h-9z" fill="#d9dce1" stroke="#8a8f98"/>
+                                <path d="M9.5 1.5v3h3" fill="none" stroke="#8a8f98"/>
+                                <path d="M5.5 7.5h5M5.5 9.5h5M5.5 11.5h3" stroke="#8a8f98"/>
+                                <rect x="8.5" y="9" width="6" height="6" rx="1.5" fill="#8b5cf6"/>
+                                <path d="M10 12h3M11.5 10.5v3" stroke="#fff" stroke-width="1.2"/>
+                            </svg>ThatZane
+                        </li>
+                    </ul>
+                </aside>
+                <div class="editor">
+                    <div class="editor-tab">ThatZane</div>
+                    <pre class="code" data-code><span class="ln"><span class="c">--[[ ThatZane: portfolio bootstrap ]]</span></span>
+<span class="ln"><span class="k">local</span> Site = <span class="f">require</span>(script.Site)</span>
+<span class="ln"></span>
+<span class="ln">Site:<span class="f">init</span>({</span>
+<span class="ln">    studio = <span class="s">"Atlantic Studios"</span>,</span>
+<span class="ln">    building = <span class="s">"BWRP v3"</span>,</span>
+<span class="ln">})</span>
+<span class="ln">Site:<span class="f">build</span>(<span class="s">"thatzane"</span>)</span>
+<span class="ln"><span class="k">return</span> Site</span></pre>
+                </div>
+            </div>
+            <div class="output">
+                <p class="panel-head">Output</p>
+                <p class="out-line">12:00:01.204  Running ThatZane</p>
+                <p class="out-line">12:00:01.388  Sending to server…</p>
+                <p class="out-line out-ok">12:00:01.912  Server: build started</p>
+            </div>
+        </div>
+
+        <div class="scene" aria-hidden="true">
+            <div class="plate"></div>
+            <div class="scene-bricks"><span class="brick">t</span><span class="brick">h</span><span class="brick">a</span><span class="brick">t</span><span class="brick brick--accent">z</span><span class="brick">a</span><span class="brick">n</span><span class="brick">e</span></div>
         </div>
     </div>
 
@@ -87,12 +134,17 @@
             </div>
 
             <div class="container hero-inner">
+                <div class="hero-top">
+                <div class="baseplate" data-baseplate>
+                    <p class="baseplate-word" aria-label="thatzane"><span aria-hidden="true" class="brick">t</span><span aria-hidden="true" class="brick">h</span><span aria-hidden="true" class="brick">a</span><span aria-hidden="true" class="brick">t</span><span aria-hidden="true" class="brick brick--accent">z</span><span aria-hidden="true" class="brick">a</span><span aria-hidden="true" class="brick">n</span><span aria-hidden="true" class="brick">e</span></p>
+                </div>
                 <dl class="hero-meta mono" data-hero-meta>
                     <div><dt>Role</dt><dd data-scramble>Developer &amp; Co-founder</dd></div>
                     <div><dt>Studio</dt><dd data-scramble>Atlantic Studios</dd></div>
                     <div><dt>Focus</dt><dd data-scramble>Luau · Backend · Systems</dd></div>
                     <div><dt>Currently</dt><dd><span class="dot" aria-hidden="true"></span>BWRP Revamp · Day <span data-day-count>—</span></dd></div>
                 </dl>
+                </div>
 
                 <h1 class="hero-title" data-hero-title>Scripting first.<br>Shipping <em>always.</em></h1>
 
@@ -406,7 +458,10 @@
     <footer class="footer">
         <div class="container footer-inner mono">
             <span>© 2026 thatzane.de</span>
-            <a href="#top">Back to top ↑</a>
+            <span class="footer-links">
+                <button type="button" class="replay" data-replay>Replay intro</button>
+                <a href="#top">Back to top ↑</a>
+            </span>
         </div>
     </footer>
 </body>
