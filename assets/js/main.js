@@ -14,6 +14,7 @@ import {
     scrambleText,
     spring,
     utils,
+    cleanInlineStyles,
 } from '../vendor/anime.esm.min.js';
 
 const root = document.documentElement;
@@ -90,13 +91,15 @@ $('[data-replay]')?.addEventListener('click', () => {
 window.__tzReady = true;
 
 if (root.classList.contains('motion')) {
-    // Webfonts change glyph widths; split text only once they are in.
-    (document.fonts ? document.fonts.ready : Promise.resolve()).then(start);
+    // Webfonts change glyph widths; split text once they are in, but never wait long on a slow network.
+    const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+    Promise.race([fontsReady, new Promise((r) => setTimeout(r, 1500))]).then(start);
 }
 
 function start() {
     const intro = root.classList.contains('intro') ? runIntro() : Promise.resolve();
-    intro.then(heroSequence);
+    // If the intro fails for any reason, drop it rather than leave the page covered.
+    intro.catch(() => endIntro()).then(heroSequence);
     sectionHeadings();
     reveals();
     counters();
@@ -128,6 +131,14 @@ function wrapChars(el) {
     return chars;
 }
 
+/** Content behind the intro overlay must not be reachable by keyboard while it plays. */
+const behindIntro = () => $$('body > .skip, body > .nav, body > main, body > footer');
+
+function endIntro() {
+    root.classList.remove('intro');
+    behindIntro().forEach((el) => { el.inert = false; });
+}
+
 /**
  * First visit of the session: a Studio session writes the site's bootstrap module,
  * runs it, and the server "builds" thatzane out of bricks on a baseplate.
@@ -149,15 +160,19 @@ function runIntro() {
 
         try { sessionStorage.setItem('tz-intro', '1'); } catch (e) { /* storage blocked */ }
 
+        behindIntro().forEach((el) => { el.inert = true; });
         utils.set(studio, { opacity: 0 });
         utils.set(outLines, { opacity: 0 });
         utils.set(bricks, { y: '-110vh' });
+
+        const onKey = (e) => { if (e.key === 'Escape') finish(true); };
 
         let finished = false;
         const finish = (fast = false) => {
             if (finished) return;
             finished = true;
             tl.pause();
+            document.removeEventListener('keydown', onKey);
             // Push the camera into the built word, then reveal the site underneath.
             animate(scene, { scale: [1, 1.35], duration: fast ? 500 : 1100, ease: 'inOut(3)' });
             animate(screen, {
@@ -166,7 +181,7 @@ function runIntro() {
                 delay: fast ? 0 : 400,
                 ease: 'out(2)',
                 onBegin: () => setTimeout(resolve, fast ? 0 : 150),
-                onComplete: () => root.classList.remove('intro'),
+                onComplete: endIntro,
             });
         };
 
@@ -199,9 +214,8 @@ function runIntro() {
             }, '<<+=300')
             .call(() => finish(), '+=450');
 
-        const skip = $('.intro-skip');
-        skip.addEventListener('click', () => finish(true));
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') finish(true); }, { once: true });
+        $('.intro-skip').addEventListener('click', () => finish(true));
+        document.addEventListener('keydown', onKey);
     });
 }
 
@@ -219,6 +233,8 @@ function heroSequence() {
         opacity: [0, 1],
         ease: spring({ bounce: 0.25, duration: 550 }),
         delay: stagger(55),
+        // Hand transform back to CSS so the :hover lift works.
+        onComplete: (anim) => cleanInlineStyles(anim),
     }, 120)
     .add('.hero-grid > span', {
         scaleY: [0, 1],
