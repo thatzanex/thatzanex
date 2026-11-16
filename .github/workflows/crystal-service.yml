@@ -22,11 +22,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Check the secrets are set
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          HOOK: ${{ secrets.CrystalShopWebhook }}
+        run: |
+          [ -n "$CF_TOKEN" ] || { echo "::error::Add the repository secret CLOUDFLARE_API_TOKEN (Cloudflare token template: Edit Cloudflare Workers)."; exit 1; }
+          [ -n "$HOOK" ] || { echo "::error::Add the repository secret CrystalShopWebhook (the Discord webhook URL)."; exit 1; }
       - uses: actions/checkout@v4
       - name: Deploy the Worker and its webhook secret
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # there's no package.json here, so name the Wrangler to install (4 reads wrangler.jsonc)
+          wranglerVersion: "4.151.1"
           workingDirectory: crystal-service
           command: deploy
           secrets: |
