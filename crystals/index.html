@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zane's Crystal Service</title>
+  <meta name="description" content="Order kyber crystals from Zane: pick your colours, send the order, and Zane gets in touch on Discord.">
+  <meta name="theme-color" content="#09090b">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thatzane.de/crystals/">
+  <meta property="og:title" content="Zane's Crystal Service">
+  <meta property="og:description" content="Pick your kyber crystals and send the order. Zane gets in touch on Discord.">
+  <meta property="og:image" content="https://thatzane.de/crystals/logo.png">
+  <link rel="canonical" href="https://thatzane.de/crystals/">
+  <link rel="icon" type="image/png" href="/crystals/favicon.png">
+  <link rel="apple-touch-icon" href="/crystals/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+  <link rel="stylesheet" href="/crystals/style.css">
+  <script type="module" src="/crystals/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#order">Skip to your order</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/crystals/">
+        <span class="brand-mark"><img src="/crystals/mark.png" alt="" width="24" height="24"></span>
+        <span class="brand-name">Crystal Service</span>
+        <span class="brand-sep" aria-hidden="true">/</span>
+        <span class="brand-sub">thatzane</span>
+      </a>
+      <div class="top-right">
+        <a class="order-chip" href="#order" data-chip><i class="ph ph-shopping-bag" aria-hidden="true"></i><span data-chip-text>Your order</span><b data-chip-count>0</b></a>
+        <a class="icon-btn" href="/" aria-label="Back to thatzane.de" title="thatzane.de"><i class="ph ph-house-simple"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="banner" aria-labelledby="page-title">
+      <p class="banner-kicker"><span class="kicker-mark" aria-hidden="true"><span></span></span>Zane's Crystal Service</p>
+      <div class="banner-row">
+        <div class="banner-text">
+          <h1 id="page-title">Kyber Crystals</h1>
+          <p>Every colour, standard or unstable. Pick what you want and send the order: Zane gets it in Discord right away and messages you to finish it.</p>
+        </div>
+        <div class="banner-stamp" aria-hidden="true"><span>10 colours</span><span>20 crystals</span></div>
+      </div>
+      <ol class="steps">
+        <li><i class="ph ph-hand-pointing" aria-hidden="true"></i>Pick your crystals</li>
+        <li><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>Send the order</li>
+        <li><i class="ph ph-chat-circle-dots" aria-hidden="true"></i>Zane messages you on Discord</li>
+      </ol>
+    </section>
+
+    <div class="layout">
+      <section class="catalog" aria-labelledby="catalog-title">
+        <div class="section-title">
+          <h2 id="catalog-title">Crystals</h2>
+          <div class="quick" role="group" aria-label="Show">
+            <button type="button" class="quick-btn" data-show="standard" aria-pressed="true">Standard</button>
+            <button type="button" class="quick-btn" data-show="unstable" aria-pressed="false">Unstable</button>
+          </div>
+        </div>
+        <div class="grid" data-grid>
+          <p class="muted">Loading the crystals…</p>
+        </div>
+      </section>
+
+      <aside class="order" id="order" aria-labelledby="order-title">
+        <form class="panel accent-top" data-form novalidate>
+          <div class="panel-title">
+            <h2 id="order-title">Your order</h2>
+            <span class="pill pill-blue" data-count>0 crystals</span>
+          </div>
+          <ul class="picked" data-picked aria-live="polite"></ul>
+          <p class="empty" data-empty><i class="ph ph-diamond" aria-hidden="true"></i>No crystals yet. Add one to start your order.</p>
+          <div class="total"><span>Total</span><strong data-total>0</strong><span class="unit">Robux</span></div>
+          <div class="budget">
+            <div class="budget-bar" role="progressbar" aria-label="Order limit used" aria-valuemin="0" data-budget-bar><span data-budget-fill></span></div>
+            <p class="budget-text" data-budget-text></p>
+          </div>
+
+          <div class="fields">
+            <label class="field">
+              <span>Roblox username</span>
+              <span class="input-icon"><i class="ph ph-game-controller" aria-hidden="true"></i><input name="roblox" type="text" autocomplete="username" maxlength="20" required placeholder="e.g. thatzanex"></span>
+            </label>
+            <label class="field">
+              <span>Discord username</span>
+              <span class="input-icon"><i class="ph ph-discord-logo" aria-hidden="true"></i><input name="discord" type="text" maxlength="37" required placeholder="So Zane can message you"></span>
+            </label>
+            <label class="field">
+              <span>Note <em>optional</em></span>
+              <textarea name="note" rows="2" maxlength="500" placeholder="Anything Zane should know"></textarea>
+            </label>
+          </div>
+          <!-- left empty by people; bots fill it in -->
+          <label class="trap" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+
+          <p class="status" data-status role="status"></p>
+          <button class="btn btn-primary btn-lg" type="submit" data-send><i class="ph-bold ph-paper-plane-tilt" aria-hidden="true"></i><span>Send order</span></button>
+          <p class="fine">Nothing is paid here. Zane confirms the order and the payment with you on Discord.</p>
+        </form>
+
+        <div class="panel done accent-top" data-done hidden tabindex="-1">
+          <img src="/crystals/logo.png" alt="" width="88" height="88">
+          <h2>Order sent</h2>
+          <p>Order <strong class="mono" data-order-id></strong> is with Zane.<br>He'll message <strong data-order-discord></strong> on Discord.</p>
+          <p class="next" data-done-next></p>
+        </div>
+
+        <div class="panel wait" data-wait hidden>
+          <span class="wait-icon" aria-hidden="true"><i class="ph ph-hourglass-medium"></i></span>
+          <h2>One order a week</h2>
+          <p data-wait-text></p>
+          <p class="next" data-wait-next></p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="bar" data-bar hidden>
+    <span data-bar-text></span>
+    <a class="btn btn-primary" href="#order">Review order</a>
+  </div>
+
+  <footer class="foot">Zane's Crystal Service, part of <a href="/">thatzane.de</a></footer>
+</body>
+</html>

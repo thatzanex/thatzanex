@@ -1,0 +1,35 @@
+# Deploys Zane's Crystal Service (the order endpoint for thatzane.de/crystals) to Cloudflare Workers.
+# Needs two repository secrets:
+#   CLOUDFLARE_API_TOKEN  a Cloudflare token with the "Edit Cloudflare Workers" template
+#   CrystalShopWebhook    the Discord webhook URL the orders are posted to
+# The page itself is served by GitHub Pages like the rest of thatzane.de.
+name: Deploy crystal service
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "crystal-service/**"
+      - "crystals/crystals.json"
+      - ".github/workflows/crystal-service.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: crystal-service
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy the Worker and its webhook secret
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: crystal-service
+          command: deploy
+          secrets: |
+            DISCORD_WEBHOOK
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.CrystalShopWebhook }}

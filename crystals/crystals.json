@@ -1,0 +1,27 @@
+{
+  "_note": "The crystals on sale, in pairs: each colour, then its Unstable version. The page shows these and the order service checks orders and works out prices from this same file. maxOrder is the most an order may total, in Robux (both check it); cooldownDays is how long the page waits before the same browser can order again.",
+  "maxOrder": 3000,
+  "cooldownDays": 7,
+  "crystals": [
+    { "id": "blue", "name": "Blue", "price": 680, "color": "#2f6bff" },
+    { "id": "unstable-blue", "name": "Unstable Blue", "price": 1140, "color": "#2f6bff", "unstable": true },
+    { "id": "green", "name": "Green", "price": 680, "color": "#22b04f" },
+    { "id": "unstable-green", "name": "Unstable Green", "price": 1140, "color": "#22b04f", "unstable": true },
+    { "id": "lime", "name": "Lime", "price": 800, "color": "#8fe03a" },
+    { "id": "unstable-lime", "name": "Unstable Lime", "price": 1200, "color": "#8fe03a", "unstable": true },
+    { "id": "cyan", "name": "Cyan", "price": 1000, "color": "#3cc8e6" },
+    { "id": "unstable-cyan", "name": "Unstable Cyan", "price": 1300, "color": "#3cc8e6", "unstable": true },
+    { "id": "orange", "name": "Orange", "price": 1000, "color": "#ff7a1f" },
+    { "id": "unstable-orange", "name": "Unstable Orange", "price": 1300, "color": "#ff7a1f", "unstable": true },
+    { "id": "pure-blue", "name": "Pure Blue", "price": 1240, "color": "#4e5dff" },
+    { "id": "unstable-pure-blue", "name": "Unstable Pure Blue", "price": 1420, "color": "#4e5dff", "unstable": true },
+    { "id": "aqua", "name": "Aqua", "price": 1400, "color": "#1fd6b4" },
+    { "id": "unstable-aqua", "name": "Unstable Aqua", "price": 1500, "color": "#1fd6b4", "unstable": true },
+    { "id": "purple", "name": "Purple", "price": 1560, "color": "#9a52ff" },
+    { "id": "unstable-purple", "name": "Unstable Purple", "price": 1580, "color": "#9a52ff", "unstable": true },
+    { "id": "yellow", "name": "Yellow", "price": 1960, "color": "#ffd23a" },
+    { "id": "unstable-yellow", "name": "Unstable Yellow", "price": 1780, "color": "#ffd23a", "unstable": true },
+    { "id": "magenta", "name": "Magenta", "price": 2360, "color": "#ff2f86" },
+    { "id": "unstable-magenta", "name": "Unstable Magenta", "price": 1980, "color": "#ff2f86", "unstable": true }
+  ]
+}

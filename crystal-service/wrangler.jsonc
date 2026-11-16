@@ -1,0 +1,18 @@
+{
+  // Zane's Crystal Service: the order endpoint for thatzane.de/crystals.
+  // Runs at https://crystal-service.thatzane.workers.dev and is deployed by
+  // .github/workflows/crystal-service.yml, which also sets the DISCORD_WEBHOOK secret from the
+  // repository secret CrystalShopWebhook.
+  "name": "crystal-service",
+  "main": "src/index.ts",
+  "account_id": "1e1771c47d6cd6e6eb3c23a585a69858",
+  "compatibility_date": "2025-09-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "vars": {
+    // Zane's Discord user ID: pinged for every new order
+    "PING_USER_ID": "440778837194965002",
+    "ALLOWED_ORIGINS": "https://thatzane.de,https://www.thatzane.de",
+    "AVATAR_URL": "https://thatzane.de/crystals/logo.png"
+  }
+}
